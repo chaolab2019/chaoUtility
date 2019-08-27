@@ -1,0 +1,82 @@
+
+---
+title: "A Quick introudction for chaolab utility"
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "", 
+                      fig.retina=2,
+                      fig.align='center',
+                      fig.width = 7, fig.height = 5,
+                      warning = FALSE, message = FALSE)
+```
+
+```{r setup}
+library(chaoUtility)
+```
+`chaoUtility` focuses on some useful tools for chao lab, include bootstrap and checktype functions
+
+## HOW TO RUN INEXT:
+The `chaoUtility` package can be downloaded with a standard R installation procedure using the following commands.
+
+```{r eval=FALSE}
+## install the latest version from github
+install.packages('devtools')
+library(devtools)
+install_github('chaolab2019/chaoUtility')
+
+## import packages
+
+```
+## MAIN FUNCTION: Boot_p()
+
+We first describe the main function `Boot_p()` with default arguments: 
+
+```{r eval=FALSE}
+Boot_p(x,zero=TRUE,Bootype="One",datatype="abundance")
+```
+<table style="width:100%;">
+<colgroup>
+<col width="20%">
+<col width="80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Argument</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+
+<tr class="odd">
+<td align="center"><code>x</code></td>
+<td align="left">a <code>matrix</code>, <code>data.frame</code>, <code>lists</code> of species abundances or incidence data.</td>
+</tr>
+<tr class="even">
+<td align="center"><code>zero</code></td>
+<td align="left">reserves zero frequency or not. Default is TRUE.</td>
+</tr>
+<tr class="odd">
+<td align="center"><code>Bootype</code></td>
+<td align="left"> <code>character</code> : "One" or "JADE". `Bootype = "One"` or `Bootype = "JADE"` <br> "One": from #99 2013 Entropy and the species accumulation curve Appendix S2: Estimating species relative abundance. <br>"JADE": from #107 Unveiling the species-rank abundance distribution by generalizing the Good-Turing sample coverage theory. </td>
+<tr class="even">
+<td align="center"><code>datatype</code></td>
+<td align="left">data type of input data: individual-based abundance data (`datatype = "abundance"`), or species by sampling-units incidence frequency (`datatype = "incidence_freq"` or `datatype = "incidence"`),or species by sampling-units incidence matrix (`datatype = "incidence_raw"`).</td>
+
+</tbody>
+</table>
+## EXAMPLES
+
+```{r }
+library(chaoUtility)
+data(bird)
+bird.inc <- bird$inci
+bird.abun<- bird$abun
+Boot_p(bird$abun, datatype="abundance")
+```
+## References
+- Chao, A., Wang, Y. T., and Jost, L. (2013). Entropy and the species accumulation curve: a novel estimator of entropy via discovery rates of new species. Methods in Ecology and Evolution, 4, 1091-1110. 
+- Chao, A., Hsieh, T. C., Chazdon, R. L., Colwell, R. K., and Gotelli, N. J. (2015). Unveiling the species-rank abundance distribution by generalizing the Good-Turing sample coverage theory. Ecology 96, 1189-1201.
