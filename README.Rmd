@@ -4,6 +4,7 @@ title: "A Quick introudction for chaolab utility"
 output: github_document
 ---
 
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
@@ -19,7 +20,7 @@ library(chaoUtility)
 ```
 `chaoUtility` focuses on some useful tools for chao lab, include bootstrap and checktype functions
 
-## HOW TO RUN INEXT:
+## HOW TO RUN chaoUtility:
 The `chaoUtility` package can be downloaded with a standard R installation procedure using the following commands.
 
 ```{r eval=FALSE}

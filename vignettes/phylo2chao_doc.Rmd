@@ -1,0 +1,51 @@
+---
+title: "A Quick introudction for chaolab utility: phylo2chaolabphy"
+author: "Hsiaotung.Huang"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+  ```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "",
+                      fig.retina=2,
+                      fig.align='center',
+                      fig.width = 7, fig.height = 5,
+                      warning = FALSE, message = FALSE)
+```
+
+```{r setup}
+library(chaoUtility)
+```
+## MAIN FUNCTION: chaolabphy()
+
+
+## HOW TO RUN chaoUtility:
+The `chaoUtility` package can be downloaded with a standard R installation procedure using the following commands.
+
+```{r eval=FALSE}
+## install the latest version from github
+install.packages('devtools')
+library(devtools)
+install_github('chaolab2019/chaoUtility')
+
+## import packages
+
+```
+
+## EXAMPLES
+
+```{r }
+library(chaoUtility)
+data(treesample)
+newphy<-phylo2chaolabphy(treesample)
+newphy$leaves
+newphy$nodes
+newphy$parts
+```
+## References
+
+

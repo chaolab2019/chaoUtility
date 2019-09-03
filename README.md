@@ -8,8 +8,8 @@ library(chaoUtility)
 
 `chaoUtility` focuses on some useful tools for chao lab, include bootstrap and checktype functions
 
-HOW TO RUN INEXT:
------------------
+HOW TO RUN chaoUtility:
+-----------------------
 
 The `chaoUtility` package can be downloaded with a standard R installation procedure using the following commands.
 

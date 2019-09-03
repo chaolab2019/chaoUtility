@@ -1,16 +1,20 @@
 Package: chaoUtility
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
+Title: chao lab utility 
+Version: 0.2.0
 Author: Chaolab
 Maintainer: The package maintainer <hsiaotung.huang@gmail.com>
 Description: collect all utilities for chao lab:
-    such as bootstrap for one paramerter and JADE, checkdatatype.
-License: What license is it under?
+    such as bootstrap for one paramerter and JADE, checkdatatype, phylo2chaolabphy.
+License: GPL-2
+Depends: R (>= 2.10)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Imports: iNEXT
+Imports: 
+    dplyr,
+    tidytree,
+    iNEXT
 Suggests: 
     knitr,
     rmarkdown
