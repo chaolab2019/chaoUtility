@@ -54,11 +54,15 @@ phylo2chaolabphy<-function(phylo)
   # y<-rev(x)
   #  namey<-rev(name)
   data.parts = list()
-  for(i in 1:length(inodes)){
-    tmp<-child(phylo.t.all.1,inodes[i])%>% pull(label)
-    data.parts[[i]] <- tmp
-  }
-  names(data.parts) = inodes.name
+  data.parts<-lapply(1:length(inodes),function(x){child(phylo.t.all.1,inodes[x])%>% pull(label)})
+  names(data.parts)<-inodes.name
+
+  # data.parts = list()
+  # for(i in 1:length(inodes)){
+  #   tmp<-child(phylo.t.all.1,inodes[i])%>% pull(label)
+  #   data.parts[[i]] <- tmp
+  # }
+  # names(data.parts) = inodes.name
 
   z <- list("leaves"=data.leaves, "nodes"=data.nodes, "parts"=data.parts)
   class(z) <- "chaolabphy"
