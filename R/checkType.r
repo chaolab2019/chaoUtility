@@ -3,6 +3,7 @@
 #' R code for check datatype
 #' @param datatype a string "abundance", "incidence", "incidence_freq", "incidence_raw"
 #' @return  a correct datatype or stop
+#' @export
 ######################################################################################################################
 
 check_datatype <- function(datatype){

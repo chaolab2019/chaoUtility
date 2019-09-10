@@ -68,3 +68,58 @@ phylo2chaolabphy<-function(phylo)
   class(z) <- "chaolabphy"
   return(z)
 }
+
+
+#######################################################################################################################
+#' R code for phylo to phytree function, we defind chaophytree objects
+#' @import dplyr
+#' @import tidytree
+#' @param phylo a phylo object
+#' @return  a chaophytree objects
+#' @examples
+#' data(treesample)
+#' newphy<-phylo2phytree(treesample)
+#' leaves <- newphy$leaves
+#' nodes<- newphy$nodes
+#' treedata<-newphy$phytree
+#'
+#'
+#' @export
+#'
+
+
+phylo2phytree<-function(phylo){
+  if(class(phylo) != "phylo")
+    stop("invlid class: only support phylo object")
+
+  phylo.root<-length(phylo$tip.label)+1
+
+  ##change to tibble format: easy to read
+  phylo.t <- tidytree::as_tibble(phylo)
+
+  ###leaves
+  phylo.t.leaves<-phylo.t %>% filter(node<phylo.root)
+  data.leaves<-phylo.t.leaves$branch.length
+  names(data.leaves) <- phylo.t.leaves$label
+
+  ###nodes
+  phylo.t.nodes<-phylo.t %>% filter(node>=phylo.root)
+  phylo.t.nodes<-phylo.t.nodes %>% mutate(Inode=node-phylo.root)
+  phylo.t.nodes<-phylo.t.nodes %>% mutate(newlable=ifelse(Inode==0,"Root",paste("I",Inode,sep="")))
+  phylo.t.nodes<-phylo.t.nodes %>% mutate(label.new=ifelse(is.na(label)|label=="",newlable,label))
+  phylo.t.nodes<-phylo.t.nodes %>% mutate(length.new=ifelse(is.na(branch.length),0,branch.length))
+  data.nodes<-phylo.t.nodes$length.new
+  names(data.nodes) <- phylo.t.nodes$label.new
+
+  ###combine leave node to complete data
+  phylo.t.nodes<-phylo.t.nodes %>% select(parent,node,length.new,label.new) %>% rename(branch.length=length.new,label=label.new)
+  phylo.t.all<-rbind(phylo.t.leaves,phylo.t.nodes)
+  phylo.t.all<-phylo.t.all %>% mutate(tgroup=ifelse(node<phylo.root,"leaves",ifelse(node==phylo.root,"Root","nodes")))
+
+  z <- list("leaves"=data.leaves, "nodes"=data.nodes, "phytree"=phylo.t.all)
+  class(z) <- "chaophytree"
+  return(z)
+
+}
+
+
