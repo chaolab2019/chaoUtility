@@ -3,6 +3,7 @@
 export(Boot_p)
 export(check_datatype)
 export(phyExpandData)
+export(phyLengthbyT)
 export(phylo2chaolabphy)
 export(phylo2phytree)
 import(dplyr)

@@ -1,0 +1,57 @@
+---
+title: "A Quick introudction for chaolab utility: phylo2phytree"
+author: "Hsiaotung"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+  ```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "",
+                      fig.retina=2,
+                      fig.align='center',
+                      fig.width = 7, fig.height = 5,
+                      warning = FALSE, message = FALSE)
+```
+
+```{r setup}
+library(chaoUtility)
+```
+## MAIN FUNCTION: phylo2phytree()
+
+
+## EXAMPLES
+
+```{r }
+library(chaoUtility)
+data(treesample)
+newphy<-phylo2phytree(treesample)
+```
+
+
+```{r }
+newphy$leaves
+
+newphy$nodes
+
+newphy$phytree
+
+
+newphy$treeH
+```
+
+```{r }
+library(phytools)
+plotTree(treesample)
+tiplabels()
+nodelabels()
+library(dplyr)
+nodetext<-newphy$phytree %>% filter(tgroup!="leaves") %>% pull(label)
+nodelabels(text=nodetext,adj=c(0,2.2))
+edgelabels(treesample$edge.length, bg="black", col="white", font=2)
+```
+
+

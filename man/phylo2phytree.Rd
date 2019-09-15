@@ -21,6 +21,7 @@ newphy<-phylo2phytree(treesample)
 leaves <- newphy$leaves
 nodes<- newphy$nodes
 treedata<-newphy$phytree
+treeH<-newphy$treeH
 
 
 }

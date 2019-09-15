@@ -15,10 +15,13 @@ phyExpandData_ <- function(x, labels, phy, datatype="abundance"){
     tmp$label<-as.character(tmp$label)
     treeNdata<-full_join(phy$phytree, tmp, by="label")
     inodelist<-treeNdata %>% filter(tgroup !="leaves") %>% pull(node)
+    names(inodelist)<-treeNdata %>% filter(tgroup !="leaves") %>% pull(label)
     inode_x<-sapply(inodelist,function(x){offspring(treeNdata,x,tiponly=T) %>% select(x) %>% sum()})
-    leave_x<-x
-    all_x<-c(leave_x,inode_x)
-    treeNdata$branch.abun<-all_x
+
+    tmp1<-data.frame(label=names(inode_x),branch.abun=inode_x)
+    tmp2<-tmp %>% rename(branch.abun=x)
+    tmp_all<-rbind(tmp2,tmp1)
+    treeNdata<-full_join(treeNdata, tmp_all, by="label") %>% select(-x)
 
 
   }else if(datatype=="incidence_raw"){
@@ -54,7 +57,7 @@ phyExpandData_ <- function(x, labels, phy, datatype="abundance"){
 #' @param datatype data type of input data: individual-based abundance data (\code{datatype = "abundance"}), species by sampling-units incidence matrix (\code{datatype = "incidence_raw"}).
 #' @return a tibble tree with abundances.
 #' @examples
-#' data(bird)
+#' data(phybird)
 #' bird.abu <- phybird$abun
 #' bird.inc <- phybird$inci
 #' bird.lab <- rownames(phybird$abun)

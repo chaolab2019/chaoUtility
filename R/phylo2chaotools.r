@@ -82,11 +82,11 @@ phylo2chaolabphy<-function(phylo)
 #' leaves <- newphy$leaves
 #' nodes<- newphy$nodes
 #' treedata<-newphy$phytree
+#' treeH<-newphy$treeH
 #'
 #'
 #' @export
 #'
-
 
 phylo2phytree<-function(phylo){
   if(class(phylo) != "phylo")
@@ -116,7 +116,18 @@ phylo2phytree<-function(phylo){
   phylo.t.all<-rbind(phylo.t.leaves,phylo.t.nodes)
   phylo.t.all<-phylo.t.all %>% mutate(tgroup=ifelse(node<phylo.root,"leaves",ifelse(node==phylo.root,"Root","nodes")))
 
-  z <- list("leaves"=data.leaves, "nodes"=data.nodes, "phytree"=phylo.t.all)
+
+  ##add treeH
+  treeH<-max(ape::node.depth.edgelength(phylo))
+
+
+  ##add node.age
+  edgelength<-ape::node.depth.edgelength(phylo)
+ # node.age<-treeH-ape::node.depth.edgelength(phylo)
+  node.age<-sapply(1:length(edgelength),function(x){ifelse(isTRUE(all.equal(edgelength[x],treeH)),0,treeH-edgelength[x])})
+  phylo.t.all<-phylo.t.all %>% mutate(node.age=node.age)
+
+  z <- list("leaves"=data.leaves, "nodes"=data.nodes, "phytree"=phylo.t.all,"treeH"=treeH)
   class(z) <- "chaophytree"
   return(z)
 

@@ -1,0 +1,39 @@
+---
+title: "A Quick introudction for chaolab utility: phyExpandData"
+author: "Hsiaotung"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+  ```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "",
+                      fig.retina=2,
+                      fig.align='center',
+                      fig.width = 7, fig.height = 5,
+                      warning = FALSE, message = FALSE)
+```
+
+```{r setup}
+library(chaoUtility)
+```
+## MAIN FUNCTION: phyExpandData()
+
+
+## EXAMPLES
+
+```{r }
+library(chaoUtility)
+data(phybird)
+bird.abu <- phybird$abun
+bird.lab <- rownames(phybird$abun)
+bird.phy <- phybird$chaophytree
+
+phyExpandData(bird.abu, labels=bird.lab, phy=bird.phy, datatype="abundance")
+
+
+```
+

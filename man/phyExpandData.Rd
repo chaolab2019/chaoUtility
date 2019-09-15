@@ -22,7 +22,7 @@ a tibble tree with abundances.
 \code{phyExpandData}: Expand branch abundance/incience and branch length
 }
 \examples{
-data(bird)
+data(phybird)
 bird.abu <- phybird$abun
 bird.inc <- phybird$inci
 bird.lab <- rownames(phybird$abun)

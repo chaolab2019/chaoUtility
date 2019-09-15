@@ -1,11 +1,12 @@
 Package: chaoUtility
 Type: Package
 Title: chao lab utility 
-Version: 0.3.0
+Version: 0.4.0
 Author: Chaolab
 Maintainer: The package maintainer <hsiaotung.huang@gmail.com>
 Description: collect all utilities for chao lab:
-    such as bootstrap for one paramerter and JADE, checkdatatype, phylo2chaolabphy.
+    such as bootstrap for one paramerter and JADE, checkdatatype, phylo2chaolabphy,
+    phyExpandData, phyLengthbyT.
 License: GPL-2
 Depends: R (>= 2.10)
 Encoding: UTF-8
