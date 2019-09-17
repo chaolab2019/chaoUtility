@@ -1,5 +1,5 @@
 ---
-title: "A Quick introudction for chaolab utility: phylo2phytree"
+title: 'A Quick introudction for chaolab utility: phylo2phytree'
 author: "Hsiaotung"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-  ```{r, include = FALSE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "",
                       fig.retina=2,
                       fig.align='center',
@@ -44,8 +44,8 @@ newphy$treeH
 ```
 
 ```{r }
-library(phytools)
-plotTree(treesample)
+library(ape)
+plot(treesample)
 tiplabels()
 nodelabels()
 library(dplyr)
