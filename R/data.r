@@ -43,3 +43,20 @@
 #' }
 #' @source
 "phybird"
+
+
+#' phyincisimple data:
+#'
+#' A list containing inci,phy tree information
+#' diamonds.
+#'
+#' @format A list with 5 elements:
+#' \describe{
+#'   \item{inci.simple.data}{incidence data, matrix}
+#'   \item{tree.simple}{phylo tree information, phylo}
+#'   \item{tree.simple.phytree}{chaophytree data, chaophytree}
+#'
+#'   ...
+#' }
+#' @source
+"phyincisimple"

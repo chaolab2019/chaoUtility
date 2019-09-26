@@ -28,5 +28,6 @@ bird.inc <- phybird$inci
 bird.lab <- rownames(phybird$abun)
 bird.phy <- phybird$chaophytree
 phyExpandData(bird.abu, labels=bird.lab, phy=bird.phy, datatype="abundance")
+phyExpandData(bird.inc, labels=bird.lab, phy=bird.phy, datatype="incidence_raw")
 
 }
