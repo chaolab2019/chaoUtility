@@ -10,7 +10,10 @@ phyExpandData_ <- function(x, labels, phy, datatype="abundance"){
   my_match <- match(labels, names(phy$leaves))
   if(sum(is.na(my_match)) > 0) stop("Argument labels and tree leaves not matach")
 
+
+
   if(datatype=="abundance"){
+    if(length(x) !=length(labels)) stop("Length of labels and abundance data not matach")
     tmp<-data.frame(label=labels,x=x)
     tmp$label<-as.character(tmp$label)
     treeNdata<-full_join(phy$phytree, tmp, by="label")
@@ -25,22 +28,33 @@ phyExpandData_ <- function(x, labels, phy, datatype="abundance"){
 
 
   }else if(datatype=="incidence_raw"){
-    # y <- iNEXT::as.incfreq(x)
-    # t <- y[1]
-    # y <- y[-1]
-    # names(y) <- labels
-    # y <- y[names(phy$leaves)]
-    # Ut <- sum(y)
-    #
-    # rownames(x) <- labels
-    # x <- x[names(phy$leaves),]
-    #
-    # for(i in 1:length(phy$parts)){
-    #   x <- rbind(x, colSums(x[phy$parts[[i]],])>0)
-    #   rownames(x)[nrow(x)] <- names(phy$parts)[i]
-    # }
-    # yy <- rowSums(x)
-    # data.frame("branch_abun"=yy, "branch_length"=c(phy$leaves, phy$nodes))
+
+    if(nrow(x) !=length(labels)) stop("Length of labels and incidence data not matach")
+    y <- iNEXT::as.incfreq(x)
+    t <- y[1]
+    y <- y[-1]
+    names(y) <- labels
+    tmp.tip<-data.frame(label=labels,x=y)
+    tmp.tip$label<-as.character(tmp.tip$label)
+    treeNdata<-full_join(phy$phytree, tmp.tip, by="label")
+
+
+    inode_each<-apply(x,2,function(i){
+      tmp<-data.frame(label=labels,x=i)
+      tmp$label<-as.character(tmp$label)
+      tmp.treeNdata<-full_join(phy$phytree, tmp, by="label")
+      inodelist<-tmp.treeNdata %>% filter(tgroup !="leaves") %>% pull(node)
+      names(inodelist)<-tmp.treeNdata %>% filter(tgroup !="leaves") %>% pull(label)
+      ivalue_each<-sapply(inodelist,function(x){offspring(tmp.treeNdata,x,tiponly=T) %>% select(x) %>% max()})
+    })
+    inode_x <- rowSums(inode_each)
+    tmp.inode<-data.frame(label=names(inode_x),branch.abun=inode_x)
+
+    tmp.tip<-tmp.tip %>% rename(branch.abun=x)
+    tmp_all<-rbind(tmp.tip,tmp.inode)
+    treeNdata<-full_join(treeNdata, tmp_all, by="label") %>% select(-x)
+
+
   }
   return(treeNdata)
 }
@@ -63,6 +77,7 @@ phyExpandData_ <- function(x, labels, phy, datatype="abundance"){
 #' bird.lab <- rownames(phybird$abun)
 #' bird.phy <- phybird$chaophytree
 #' phyExpandData(bird.abu, labels=bird.lab, phy=bird.phy, datatype="abundance")
+#' phyExpandData(bird.inc, labels=bird.lab, phy=bird.phy, datatype="incidence_raw")
 #'
 #' @export
 phyExpandData <- function(x, labels, phy, datatype="abundance"){

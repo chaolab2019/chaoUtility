@@ -2,6 +2,9 @@ A Quick introudction for chaolab utility
 ================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+overview
+========
+
 ``` r
 library(chaoUtility)
 ```
@@ -12,11 +15,11 @@ general functions:[`Boot_p()`](#boot_p) and `checktype()`
 
 phylogeny fucntions:
 
--[`phylo2phytree()`](#phylo2phytree) : input phylo object, return chaophytree object
+-[`phylo2phytree()`](#phylo2phytree) : input phylo object([ultrmetric](#examples-ultrametictree) or [non-ultrametric](#examples-non-ultrametictree)), return chaophytree object
 
--[`phyExpandData()`](#phyexpanddata) : input abundance data, label,chaophytree object, return tibble with abundance
+-[`phyExpandData()`](#phyexpanddata) : input abundance data, label,chaophytree object, return tibble with abundance or [incidence data](#examples-incidence-simple-data).
 
--[`phylengthbyT()`](#phylengthbyt) : input vector of ageT, chaophytree object, return matrix with label and new branch.length
+-[`phylengthbyT()`](#phylengthbyt) : input vector of ageT, chaophytree object, return matrix with label and new branch.length (default `rootExtend =F` ,if `rootExtend=T and ageT>treeH`, root.length=ageT-treeH), [non ultrametric tree example](#examples-non-ultrametric-tree-by-reference-t)
 
 -`phylo2chaolabphy()`
 
@@ -199,11 +202,12 @@ References
 -   Chao, A., Wang, Y. T., and Jost, L. (2013). Entropy and the species accumulation curve: a novel estimator of entropy via discovery rates of new species. Methods in Ecology and Evolution, 4, 1091-1110.
 -   Chao, A., Hsieh, T. C., Chazdon, R. L., Colwell, R. K., and Gotelli, N. J. (2015). Unveiling the species-rank abundance distribution by generalizing the Good-Turing sample coverage theory. Ecology 96, 1189-1201.
 
+[back](#overview)
+
 phylo2phytree
 -------------
 
-EXAMPLES
---------
+### examples ultrametictree
 
 ``` r
 library(chaoUtility)
@@ -263,13 +267,75 @@ nodelabels(text=nodetext,adj=c(0,2.2))
 edgelabels(treesample$edge.length, bg="black", col="white", font=2)
 ```
 
-<img src="README_files/figure-markdown_github/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_github/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /> [back](#overview)
+
+### examples non ultrametictree
+
+``` r
+text<-"(((((((A:4,B:4):6,C:5):8,D:6):3,E:21):10,((F:4,G:12):14,H:8):13):13,((I:5,J:2):30,(K:11,L:11):2):17):4,M:56);"
+library(ape)
+tree2<-read.tree(text=text)
+
+library(chaoUtility)
+tree2.phytree<-phylo2phytree(tree2)
+
+library(dplyr)
+nodetext<-tree2.phytree$phytree %>% filter(tgroup!="leaves") %>% pull(label)
+plot(tree2)
+nodelabels(text=nodetext)
+edgelabels(tree2$edge.length, bg="black", col="white", font=2)
+```
+
+<img src="README_files/figure-markdown_github/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
+
+``` r
+
+tree2.phytree$treeH
+[1] 56
+
+as.data.frame(tree2.phytree$phytree)
+   parent node branch.length label tgroup node.age
+1      20    1             4     A leaves        8
+2      20    2             4     B leaves        8
+3      19    3             5     C leaves       13
+4      18    4             6     D leaves       20
+5      17    5            21     E leaves        8
+6      22    6             4     F leaves        8
+7      22    7            12     G leaves        0
+8      21    8             8     H leaves       18
+9      24    9             5     I leaves        0
+10     24   10             2     J leaves        3
+11     25   11            11     K leaves       22
+12     25   12            11     L leaves       22
+13     14   13            56     M leaves        0
+14     14   14             0  Root   Root       56
+15     14   15             4    I1  nodes       52
+16     15   16            13    I2  nodes       39
+17     16   17            10    I3  nodes       29
+18     17   18             3    I4  nodes       26
+19     18   19             8    I5  nodes       18
+20     19   20             6    I6  nodes       12
+21     16   21            13    I7  nodes       26
+22     21   22            14    I8  nodes       12
+23     15   23            17    I9  nodes       35
+24     23   24            30   I10  nodes        5
+25     23   25             2   I11  nodes       33
+
+tree2.phytree$leaves
+ A  B  C  D  E  F  G  H  I  J  K  L  M 
+ 4  4  5  6 21  4 12  8  5  2 11 11 56 
+
+tree2.phytree$nodes
+Root   I1   I2   I3   I4   I5   I6   I7   I8   I9  I10  I11 
+   0    4   13   10    3    8    6   13   14   17   30    2 
+```
+
+[back](#overview)
 
 phyExpandData
 -------------
 
-EXAMPLES
---------
+### EXAMPLES:abundance data
 
 ``` r
 library(chaoUtility)
@@ -380,104 +446,67 @@ $South.site
 # ... with 71 more rows
 ```
 
+[back](#overview)
+
+### examples incidence simple data
+
+``` r
+library(chaoUtility)
+data(phyincisimple)
+data.inc <- phyincisimple$inci.simple.data
+data.lab<-rownames(data.inc)
+phy.inc<-phyincisimple$tree.simple.phytree
+
+
+phylotree<-phyincisimple$tree.simple
+plot(phylotree)
+nodetext<-phy.inc$phytree %>% filter(tgroup!="leaves") %>% pull(label)
+nodelabels(text=nodetext)
+edgelabels(phylotree$edge.length, bg="black", col="white", font=2)
+```
+
+<img src="README_files/figure-markdown_github/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" />
+
+``` r
+data.inc
+  p1 p2 p3 p4 p5 p6
+A  1  1  1  1  0  0
+B  1  0  1  0  1  1
+C  0  0  1  0  0  1
+D  0  1  0  1  1  0
+E  1  1  0  1  1  0
+
+dataNtree<-phyExpandData(data.inc, labels=data.lab, phy=phy.inc, datatype="incidence_raw")
+as.data.frame(dataNtree)
+  parent node branch.length label tgroup node.age branch.abun
+1      8    1           0.2     A leaves      0.0           4
+2      8    2           0.2     B leaves      0.0           4
+3      9    3           0.3     C leaves      0.0           2
+4      9    4           0.3     D leaves      0.0           3
+5      6    5           0.8     E leaves      0.0           4
+6      6    6           1.0  Root   Root      0.8           6
+7      6    7           0.3    I1  nodes      0.5           6
+8      7    8           0.3    I2  nodes      0.2           6
+9      7    9           0.2    I3  nodes      0.3           5
+```
+
+[back](#overview)
+
 phyLengthbyT
 ------------
 
-EXAMPLES
---------
+### EXAMPLES
 
 ``` r
 library(chaoUtility)
 data(phybird)
 bird.phy <- phybird$chaophytree
 
-bird.phy
-$leaves
-        Alisterus_scapularis          Platycercus_elegans 
-                    31.96596                     31.96596 
-            Cacatua_galerita     Calyptorhynchus_funereus 
-                    32.14669                     32.14669 
-      Menura_novaehollandiae    Ptilonorhynchus_violaceus 
-                    60.62485                     49.84136 
-       Cormobates_leucophaea             Malurus_lamberti 
-                    49.84136                     14.32657 
-             Malurus_cyaneus         Pardalotus_punctatus 
-                    14.32657                     36.96028 
-          Phylidonyris_niger            Meliphaga_lewinii 
-                    29.76382                     19.80340 
-        Manorina_melanophrys       Lichenostomus_chrysops 
-                    15.95365                     15.95365 
-Acanthorhynchus_tenuirostris         Sericornis_frontalis 
-                    27.53494                     14.53269 
-    Sericornis_citreogularis            Acanthiza_pusilla 
-                    14.53269                     13.66428 
-              Acanthiza_nana            Acanthiza_lineata 
-                    10.95325                     10.95325 
-              Gerygone_mouki          Psophodes_olivaceus 
-                    23.07150                     36.82312 
-          Strepera_graculina      Colluricincla_harmonica 
-                    36.82312                     24.54039 
-     Pachycephala_pectoralis     Pachycephala_rufiventris 
-                    11.15698                     11.15698 
-       Pachycephala_olivacea           Oriolus_sagittatus 
-                    16.54331                     30.55131 
-         Monarcha_melanopsis          Ptiloris_paradiseus 
-                    25.46105                     25.46105 
-         Rhipidura_rufifrons         Rhipidura_albicollis 
-                    15.43905                     15.43905 
-           Corvus_coronoides         Eopsaltria_australis 
-                    27.82257                     37.96554 
-              Petroica_rosea          Zosterops_lateralis 
-                    37.96554                     44.54298 
-           Zoothera_lunulata          Neochmia_temporalis 
-                    43.62842                     43.62842 
-         Dacelo_novaeguineae      Leucosarcia_melanoleuca 
-                    80.56847                     76.73652 
-   Cacomantis_flabelliformis 
-                    76.73652 
-
-$nodes
-      Root         I1         I2         I3         I4         I5 
- 0.0000000  2.2890338  3.3780170 32.1763058 13.0481910 12.8674561 
-        I6         I7         I8         I9        I10        I11 
-16.5656036  3.6411840  7.1423040  3.5604001  7.7250663 31.3716245 
-       I12        I13        I14        I15        I16        I17 
- 7.6639121  1.0740030  7.1964609  2.2288786  7.7315406  3.8497540 
-       I18        I19        I20        I21        I22        I23 
-14.9627814  1.8811889  6.6576213  7.5260388  2.7110275  3.0724789 
-       I24        I25        I26        I27        I28        I29 
-11.2166519  2.3110182  2.7312937 11.8624466  7.9970842  5.3863282 
-       I30        I31        I32        I33        I34        I35 
- 5.8515332  2.7287374  1.2437461  1.1177720 11.1397726  3.3279815 
-       I36        I37        I38        I39 
- 9.0572663  2.4798231  0.9145603  6.1209866 
-
-$phytree
-# A tibble: 81 x 6
-   parent  node branch.length label                     tgroup node.age
-    <int> <int>         <dbl> <chr>                     <chr>     <dbl>
- 1     46     1          32.0 Alisterus_scapularis      leaves        0
- 2     46     2          32.0 Platycercus_elegans       leaves        0
- 3     47     3          32.1 Cacatua_galerita          leaves        0
- 4     47     4          32.1 Calyptorhynchus_funereus  leaves        0
- 5     48     5          60.6 Menura_novaehollandiae    leaves        0
- 6     50     6          49.8 Ptilonorhynchus_violaceus leaves        0
- 7     50     7          49.8 Cormobates_leucophaea     leaves        0
- 8     53     8          14.3 Malurus_lamberti          leaves        0
- 9     53     9          14.3 Malurus_cyaneus           leaves        0
-10     55    10          37.0 Pardalotus_punctatus      leaves        0
-# ... with 71 more rows
-
-$treeH
-[1] 82.8575
-
-attr(,"class")
-[1] "chaophytree"
 
 bird.phy$treeH
 [1] 82.8575
 
-phyLengthbyT(Ts=c(90,75,55), phy=bird.phy, datatype="abundance")
+phyLengthbyT(Ts=c(90,75,55), phy=bird.phy, datatype="abundance",rootExtend=T)
                                    [,1]       [,2]       [,3]
 Alisterus_scapularis         31.9659554 31.9659554 31.9659554
 Platycercus_elegans          31.9659554 31.9659554 31.9659554
@@ -520,7 +549,7 @@ Neochmia_temporalis          43.6284206 43.6284206 43.6284206
 Dacelo_novaeguineae          80.5684691 75.0000000 55.0000000
 Leucosarcia_melanoleuca      76.7365165 75.0000000 55.0000000
 Cacomantis_flabelliformis    76.7365166 75.0000000 55.0000000
-Root                          0.0000000  0.0000000  0.0000000
+Root                          7.1424967  0.0000000  0.0000000
 I1                            2.2890338  0.0000000  0.0000000
 I2                            3.3780170  0.0000000  0.0000000
 I3                           32.1763058 29.9858534  9.9858534
@@ -561,3 +590,88 @@ I37                           2.4798231  2.4798231  2.4798231
 I38                           0.9145603  0.9145603  0.9145603
 I39                           6.1209866  0.0000000  0.0000000
 ```
+
+[back](#overview)
+
+### examples non ultrametric tree by reference t
+
+``` r
+text<-"(((((((A:4,B:4):6,C:5):8,D:6):3,E:21):10,((F:4,G:12):14,H:8):13):13,((I:5,J:2):30,(K:11,L:11):2):17):4,M:56);"
+library(ape)
+tree2<-read.tree(text=text)
+
+library(chaoUtility)
+phytree<-phylo2phytree(tree2)
+
+phytree$treeH
+[1] 56
+
+phyLengthbyT(Ts=c(75,55,50), phy=phytree, datatype="abundance",rootExtend=T)
+     [,1] [,2] [,3]
+A       4    4    4
+B       4    4    4
+C       5    5    5
+D       6    6    6
+E      21   21   21
+F       4    4    4
+G      12   12   12
+H       8    8    8
+I       5    5    5
+J       2    2    2
+K      11   11   11
+L      11   11   11
+M      56   55   50
+Root   19    0    0
+I1      4    3    0
+I2     13   13   11
+I3     10   10   10
+I4      3    3    3
+I5      8    8    8
+I6      6    6    6
+I7     13   13   13
+I8     14   14   14
+I9     17   17   15
+I10    30   30   30
+I11     2    2    2
+
+library(dplyr)
+nodetext<-phytree$phytree %>% filter(tgroup!="leaves") %>% pull(label)
+plot(tree2)
+nodelabels(text=nodetext)
+edgelabels(tree2$edge.length, bg="black", col="white", font=2)
+```
+
+<img src="README_files/figure-markdown_github/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" />
+
+``` r
+
+as.data.frame(phytree$phytree)
+   parent node branch.length label tgroup node.age
+1      20    1             4     A leaves        8
+2      20    2             4     B leaves        8
+3      19    3             5     C leaves       13
+4      18    4             6     D leaves       20
+5      17    5            21     E leaves        8
+6      22    6             4     F leaves        8
+7      22    7            12     G leaves        0
+8      21    8             8     H leaves       18
+9      24    9             5     I leaves        0
+10     24   10             2     J leaves        3
+11     25   11            11     K leaves       22
+12     25   12            11     L leaves       22
+13     14   13            56     M leaves        0
+14     14   14             0  Root   Root       56
+15     14   15             4    I1  nodes       52
+16     15   16            13    I2  nodes       39
+17     16   17            10    I3  nodes       29
+18     17   18             3    I4  nodes       26
+19     18   19             8    I5  nodes       18
+20     19   20             6    I6  nodes       12
+21     16   21            13    I7  nodes       26
+22     21   22            14    I8  nodes       12
+23     15   23            17    I9  nodes       35
+24     23   24            30   I10  nodes        5
+25     23   25             2   I11  nodes       33
+```
+
+[back](#overview)

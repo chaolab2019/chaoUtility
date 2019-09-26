@@ -1,7 +1,7 @@
 Package: chaoUtility
 Type: Package
 Title: chao lab utility 
-Version: 0.4.0
+Version: 0.5.0
 Author: Chaolab
 Maintainer: The package maintainer <hsiaotung.huang@gmail.com>
 Description: collect all utilities for chao lab:
