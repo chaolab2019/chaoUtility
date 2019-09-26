@@ -202,6 +202,8 @@ References
 -   Chao, A., Wang, Y. T., and Jost, L. (2013). Entropy and the species accumulation curve: a novel estimator of entropy via discovery rates of new species. Methods in Ecology and Evolution, 4, 1091-1110.
 -   Chao, A., Hsieh, T. C., Chazdon, R. L., Colwell, R. K., and Gotelli, N. J. (2015). Unveiling the species-rank abundance distribution by generalizing the Good-Turing sample coverage theory. Ecology 96, 1189-1201.
 
+[back](#overview)
+
 phylo2phytree
 -------------
 
@@ -265,7 +267,70 @@ nodelabels(text=nodetext,adj=c(0,2.2))
 edgelabels(treesample$edge.length, bg="black", col="white", font=2)
 ```
 
-<img src="README_files/figure-markdown_github/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_github/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /> [back](#overview)
+
+### examples non ultrametictree
+
+``` r
+text<-"(((((((A:4,B:4):6,C:5):8,D:6):3,E:21):10,((F:4,G:12):14,H:8):13):13,((I:5,J:2):30,(K:11,L:11):2):17):4,M:56);"
+library(ape)
+tree2<-read.tree(text=text)
+
+library(chaoUtility)
+tree2.phytree<-phylo2phytree(tree2)
+
+library(dplyr)
+nodetext<-tree2.phytree$phytree %>% filter(tgroup!="leaves") %>% pull(label)
+plot(tree2)
+nodelabels(text=nodetext)
+edgelabels(tree2$edge.length, bg="black", col="white", font=2)
+```
+
+<img src="README_files/figure-markdown_github/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
+
+``` r
+
+tree2.phytree$treeH
+[1] 56
+
+as.data.frame(tree2.phytree$phytree)
+   parent node branch.length label tgroup node.age
+1      20    1             4     A leaves        8
+2      20    2             4     B leaves        8
+3      19    3             5     C leaves       13
+4      18    4             6     D leaves       20
+5      17    5            21     E leaves        8
+6      22    6             4     F leaves        8
+7      22    7            12     G leaves        0
+8      21    8             8     H leaves       18
+9      24    9             5     I leaves        0
+10     24   10             2     J leaves        3
+11     25   11            11     K leaves       22
+12     25   12            11     L leaves       22
+13     14   13            56     M leaves        0
+14     14   14             0  Root   Root       56
+15     14   15             4    I1  nodes       52
+16     15   16            13    I2  nodes       39
+17     16   17            10    I3  nodes       29
+18     17   18             3    I4  nodes       26
+19     18   19             8    I5  nodes       18
+20     19   20             6    I6  nodes       12
+21     16   21            13    I7  nodes       26
+22     21   22            14    I8  nodes       12
+23     15   23            17    I9  nodes       35
+24     23   24            30   I10  nodes        5
+25     23   25             2   I11  nodes       33
+
+tree2.phytree$leaves
+ A  B  C  D  E  F  G  H  I  J  K  L  M 
+ 4  4  5  6 21  4 12  8  5  2 11 11 56 
+
+tree2.phytree$nodes
+Root   I1   I2   I3   I4   I5   I6   I7   I8   I9  I10  I11 
+   0    4   13   10    3    8    6   13   14   17   30    2 
+```
+
+[back](#overview)
 
 ### examples non ultrametictree
 
@@ -442,6 +507,11 @@ $South.site
 # ... with 71 more rows
 ```
 
+<<<<<<< HEAD
+=======
+[back](#overview)
+
+>>>>>>> ori9/master
 ### examples incidence simple data
 
 ``` r
@@ -484,6 +554,11 @@ as.data.frame(dataNtree)
 9      7    9           0.2    I3  nodes      0.3           5
 ```
 
+<<<<<<< HEAD
+=======
+[back](#overview)
+
+>>>>>>> ori9/master
 phyLengthbyT
 ------------
 
@@ -583,6 +658,11 @@ I38                           0.9145603  0.9145603  0.9145603
 I39                           6.1209866  0.0000000  0.0000000
 ```
 
+<<<<<<< HEAD
+=======
+[back](#overview)
+
+>>>>>>> ori9/master
 ### examples non ultrametric tree by reference t
 
 ``` r
@@ -663,3 +743,8 @@ as.data.frame(phytree$phytree)
 24     23   24            30   I10  nodes        5
 25     23   25             2   I11  nodes       33
 ```
+<<<<<<< HEAD
+=======
+
+[back](#overview)
+>>>>>>> ori9/master
