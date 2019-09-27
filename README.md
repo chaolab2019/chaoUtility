@@ -19,6 +19,8 @@ phylogeny fucntions:
 
 -[`phyExpandData()`](#phyexpanddata) : input abundance data, label,chaophytree object, return tibble with abundance or [incidence data](#examples-incidence-simple-data).
 
+-[`phyExpandData()`](#phyexpanddata) : input abundance data, label,chaophytree object, return tibble with abundance or [incidence data](#examples-incidence-simple-data).
+
 -[`phylengthbyT()`](#phylengthbyt) : input vector of ageT, chaophytree object, return matrix with label and new branch.length (default `rootExtend =F` ,if `rootExtend=T and ageT>treeH`, root.length=ageT-treeH), [non ultrametric tree example](#examples-non-ultrametric-tree-by-reference-t)
 
 -`phylo2chaolabphy()`
@@ -349,7 +351,7 @@ nodelabels(text=nodetext)
 edgelabels(tree2$edge.length, bg="black", col="white", font=2)
 ```
 
-<img src="README_files/figure-markdown_github/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_github/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" />
 
 ``` r
 
@@ -507,11 +509,18 @@ $South.site
 # ... with 71 more rows
 ```
 
-<<<<<<< HEAD
-=======
+### examples incidence simple data
+
+``` r
+library(chaoUtility)
+data(phyincisimple)
+data.inc <- phyincisimple$inci.simple.data
+data.lab<-rownames(data.inc)
+phy.inc<-phyincisimple$tree.simple.phytree
+```
+
 [back](#overview)
 
->>>>>>> ori9/master
 ### examples incidence simple data
 
 ``` r
@@ -522,6 +531,7 @@ data.lab<-rownames(data.inc)
 phy.inc<-phyincisimple$tree.simple.phytree
 
 
+
 phylotree<-phyincisimple$tree.simple
 plot(phylotree)
 nodetext<-phy.inc$phytree %>% filter(tgroup!="leaves") %>% pull(label)
@@ -529,7 +539,7 @@ nodelabels(text=nodetext)
 edgelabels(phylotree$edge.length, bg="black", col="white", font=2)
 ```
 
-<img src="README_files/figure-markdown_github/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_github/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" />
 
 ``` r
 data.inc
@@ -554,11 +564,8 @@ as.data.frame(dataNtree)
 9      7    9           0.2    I3  nodes      0.3           5
 ```
 
-<<<<<<< HEAD
-=======
 [back](#overview)
 
->>>>>>> ori9/master
 phyLengthbyT
 ------------
 
@@ -658,11 +665,16 @@ I38                           0.9145603  0.9145603  0.9145603
 I39                           6.1209866  0.0000000  0.0000000
 ```
 
-<<<<<<< HEAD
-=======
 [back](#overview)
 
->>>>>>> ori9/master
+### examples non ultrametric tree by reference t
+
+``` r
+text<-"(((((((A:4,B:4):6,C:5):8,D:6):3,E:21):10,((F:4,G:12):14,H:8):13):13,((I:5,J:2):30,(K:11,L:11):2):17):4,M:56);"
+library(ape)
+tree2<-read.tree(text=text)
+```
+
 ### examples non ultrametric tree by reference t
 
 ``` r
@@ -711,7 +723,7 @@ nodelabels(text=nodetext)
 edgelabels(tree2$edge.length, bg="black", col="white", font=2)
 ```
 
-<img src="README_files/figure-markdown_github/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_github/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" />
 
 ``` r
 
@@ -743,8 +755,13 @@ as.data.frame(phytree$phytree)
 24     23   24            30   I10  nodes        5
 25     23   25             2   I11  nodes       33
 ```
-<<<<<<< HEAD
-=======
 
-[back](#overview)
->>>>>>> ori9/master
+library(chaoUtility) phytree&lt;-phylo2phytree(tree2)
+
+phytree$treeH
+
+phyLengthbyT(Ts=c(75,55,50), phy=phytree, datatype="abundance",rootExtend=T)
+
+library(dplyr) nodetext&lt;-phytree*p**h**y**t**r**e**e*edge.length, bg="black", col="white", font=2)
+
+as.data.frame(phytree$phytree) \`\`\` [back](#overview)
