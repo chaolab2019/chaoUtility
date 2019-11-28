@@ -13,6 +13,14 @@
 #' @source
 "bird"
 
+#' incidence freq data:
+#'
+#'
+#' @format data.frame:
+#'
+#' @source
+"incdata"
+
 
 
 

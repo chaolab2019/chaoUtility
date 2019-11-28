@@ -27,3 +27,10 @@ Appendix S2:  Estimating species relative abundance :one parameter
 bootp_one_abu(x) is a function for abundance data
 bootp_one_inc(x) is a function for incidence data
 }
+\examples{
+data(bird)
+bird.inc <- bird$inci
+bird.abun<- bird$abun
+Boot_p(bird$abun, datatype="abundance")
+Boot_p(bird$abun, datatype="incidence_raw")
+}

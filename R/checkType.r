@@ -22,7 +22,7 @@ check_datatype <- function(datatype){
 #' @return  a correct Bootype or stop
 ######################################################################################################################
 check_Bootype <- function(Bootype){
-  TYPE <- c("One", "JADE")
+  TYPE <- c("One", "JADE","SAR")
   if((is.na(pmatch(Bootype, TYPE))) | (pmatch(Bootype, TYPE) == -1))
     stop("invalid Bootype")
   return(Bootype)

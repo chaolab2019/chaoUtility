@@ -6,16 +6,19 @@
 2013 Entropy and the species accumulation curve Appendix S2: Estimating species relative abundance :one parameter
 based on individual-based (abundance) and sampling-unit-based (incidence) data.}
 \usage{
-Boot_p(x, zero = TRUE, Bootype = "One", datatype = "abundance")
+Boot_p(x, zero = TRUE, Bootype = "One", datatype = "abundance",
+  rho = NaN)
 }
 \arguments{
 \item{x}{a vector/matrix/list of species abundance frequency}
 
 \item{zero}{reserves zero frequency or not. Default is TRUE.}
 
-\item{Bootype}{a string= "JADE" or "One". Default is "One"}
+\item{Bootype}{a string= "JADE" or "One" or "SAR". Default is "One", SAR for without replacement}
 
 \item{datatype}{a string}
+
+\item{rho}{a numerical value as sampling fraction, only for SAR default=NaN}
 }
 \value{
 a vector/matrix/list with species relative abundance or detection probability distribution

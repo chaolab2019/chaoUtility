@@ -92,7 +92,7 @@ Boot_p(x,zero=TRUE,Bootype="One",datatype="abundance")
 </tr>
 <tr class="odd">
 <td align="center"><code>Bootype</code></td>
-<td align="left"> <code>character</code> : "One" or "JADE". `Bootype = "One"` or `Bootype = "JADE"` <br> "One": from #99 2013 Entropy and the species accumulation curve Appendix S2: Estimating species relative abundance. <br>"JADE": from #107 Unveiling the species-rank abundance distribution by generalizing the Good-Turing sample coverage theory. </td>
+<td align="left"> <code>character</code> : "One" or "JADE" or "SAR". `Bootype = "One"` or `Bootype = "JADE"` or `Bootype = "SAR"`<br> "One": from #99 2013 Entropy and the species accumulation curve Appendix S2: Estimating species relative abundance. <br>"JADE": from #107 Unveiling the species-rank abundance distribution by generalizing the Good-Turing sample coverage theory. <br>"SAR": :sampleing which was drawn without replacement (based on one parameter estimated method)</td>
 <tr class="even">
 <td align="center"><code>datatype</code></td>
 <td align="left">data type of input data: individual-based abundance data (`datatype = "abundance"`), or species by sampling-units incidence frequency (`datatype = "incidence_freq"` or `datatype = "incidence"`),or species by sampling-units incidence matrix (`datatype = "incidence_raw"`).</td>
@@ -102,6 +102,20 @@ Boot_p(x,zero=TRUE,Bootype="One",datatype="abundance")
 
 ## EXAMPLES
 
+
+without replacement:
+```{r }
+library(chaoUtility)
+data(bird)
+bird.abun<- bird$abun
+Boot_p(bird$abun,zero=FALSE,Bootype="SAR",datatype="abundance",rho=0.8)
+
+data(incdata)
+Boot_p(incdata,zero=FALSE,Bootype="SAR",datatype="incidence",rho=0.8)
+```
+
+
+with replacement:One
 ```{r }
 library(chaoUtility)
 data(bird)

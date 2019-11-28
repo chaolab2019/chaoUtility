@@ -83,7 +83,7 @@ reserves zero frequency or not. Default is TRUE.
 <code>Bootype</code>
 </td>
 <td align="left">
-<code>character</code> : "One" or "JADE". `Bootype = "One"` or `Bootype = "JADE"` <br> "One": from \#99 2013 Entropy and the species accumulation curve Appendix S2: Estimating species relative abundance. <br>"JADE": from \#107 Unveiling the species-rank abundance distribution by generalizing the Good-Turing sample coverage theory.
+<code>character</code> : "One" or "JADE" or "SAR". `Bootype = "One"` or `Bootype = "JADE"` or `Bootype = "SAR"`<br> "One": from \#99 2013 Entropy and the species accumulation curve Appendix S2: Estimating species relative abundance. <br>"JADE": from \#107 Unveiling the species-rank abundance distribution by generalizing the Good-Turing sample coverage theory. <br>"SAR": :sampleing which was drawn without replacement (based on one parameter estimated method)
 </td>
 <tr class="even">
 <td align="center">
@@ -96,6 +96,132 @@ data type of input data: individual-based abundance data (`datatype = "abundance
 </table>
 EXAMPLES
 --------
+
+without replacement:
+
+``` r
+library(chaoUtility)
+data(bird)
+bird.abun<- bird$abun
+Boot_p(bird$abun,zero=FALSE,Bootype="SAR",datatype="abundance",rho=0.8)
+$North.site
+ [1] 39  4  2  6  3  3 12  2  3  6 13  1  9  8  2  2 18 12  2  2  6  3 13
+[24]  9  2  4 14  1  1
+
+$South.site
+ [1]  3 17 32  3  2  1  6  7 33  6 12  1  3  5  6  6 17  6 11 11  3 13  3
+[24] 14  3  8  6  2  3 21 10  2  6  5  1 17  2
+
+data(incdata)
+Boot_p(incdata,zero=FALSE,Bootype="SAR",datatype="incidence",rho=0.8)
+$Monsoon
+plots                                                                   
+  191     8     8     3    28     2    73     2     2     8    11     3 
+                                                                        
+    2     2     3    49     7     1     3    50     3     9    16    55 
+                                                                        
+  136    22     1    18     2     3     9     1     2   105     2     2 
+                                                                        
+    3     2     6     1    23     2     3    28     6     4    15     5 
+                                                                        
+    2     5    41     7    82    35     3     2     4     8     5     7 
+                                                                        
+    4    16     8    16    29     1     2    32     3    27     0    40 
+                                                                        
+    4     3    72    10     2    33    34    21    12    31    72     2 
+                                                                        
+    2    45     6     2     2    10     2   125    10    68    32   142 
+                                                                        
+    2     2     1     2     3     6    12   112    69     3    84    17 
+                                                                        
+    6     7     1     3    15    53    32     6     7     8   105    19 
+                                                                        
+   10     5   112    54    55     2     2     6     1     4     2    13 
+                                                                        
+    1    12     1     2    27    63     5    47     6     5    38     3 
+                                                                        
+   11    91     3    81    24    46     2     1    70    84    17     3 
+                                                                        
+    3    38     4    11    15     3     8     3    11    45    92     6 
+                                                                        
+   24     2    20    12   105     2     2     6    21    42    43    10 
+                                                                        
+   17     4    27     4     2     2   112     1     8     4    14    30 
+                                                                        
+    3     3    19    52   186    58     4     2    40    62     1    40 
+                                                                        
+   47     3     2    18     1     5     6    27    66   116     2     2 
+                                                                        
+    2     0    10     2     2     4    37   111     2     9    24     8 
+                                                                        
+    9     1     3    44     2     7    54     6    16     7    49     9 
+                                                                        
+   13     6     2     7     1     3     2     2     1     2    19    16 
+                                                                        
+   14     8    12     2   143    95    77     3    75     2     2     2 
+                                                                        
+   35     2    10     2    12     2     2     4     3    13    26   154 
+                                                                        
+    5     2     2    17     2    35     2     1     1     2    48    33 
+                                                                        
+    2     2     8    36     7     2     3     4    52     1    42    17 
+                                                                        
+    7     1     5     3     1     3    45    18    60    14     2    16 
+                                                                        
+   11     1    69    18    60    13     5     1     3     8     2     9 
+                                                                        
+   47     0    28     2   104     2     2     1     1     1     1     2 
+                                                            
+    2     2     2     2     2     1     2     2     1     2 
+
+$Upper.cloud
+plots                                                                   
+  153     2     2     1     7    29    13     7    13    34    17     1 
+                                                                        
+    3     1     2    38     2     1     7     5    29     2     3    34 
+                                                                        
+    2     6    60    43     3     2    10     2    39     3     5    47 
+                                                                        
+    7     3     8    39    54    76    59     4     5    47     1    70 
+                                                                        
+    1     2     2     3    46     4     5     1     2     2     2    32 
+                                                                        
+   60    52    92    17     6    32    11     4    11     2     2     1 
+                                                                        
+    2     5     2     7    65    36     7     4     3     4     0    19 
+                                                                        
+    3    64     2     1    42    17     4     3     2     2     9     1 
+                                                                        
+    4     3     2     2    30     2    11    37     1    11     2    28 
+                                                                        
+   14    25     3    12     2     3     1    24    44    60     3     3 
+                                                                        
+    6    13   141     2     0     2     9     9     1     4     2     1 
+                                                                        
+   16     9     6    25     1     1     1     1    29     1     3     3 
+                                                                        
+    7    19     2    15     1    11     1    12     4     3     3    15 
+                                                                        
+    4    50     3     8     5     2     7     5     7     4     4     2 
+                                                                        
+    2     5     3     3    40    80     1     2     2     8    10     2 
+                                                                        
+    1     4    21    14     2     2     5     5    38     4     6     2 
+                                                                        
+    5     2     1    40    50     8     2    12     4    39    55     1 
+                                                                        
+   99     7     4     4    41    22     4    14     8    73     2     1 
+                                                                        
+  104    87     2    11     4     3     6     0    12     3     1     4 
+                                                                        
+   22     2    10     7     2     2     2     2    25     6    27     1 
+                                                                        
+    2     2     1     1     2     2     2     2     2     2     2     2 
+      
+    1 
+```
+
+with replacement:One
 
 ``` r
 library(chaoUtility)
@@ -269,7 +395,7 @@ nodelabels(text=nodetext,adj=c(0,2.2))
 edgelabels(treesample$edge.length, bg="black", col="white", font=2)
 ```
 
-<img src="README_files/figure-markdown_github/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /> [back](#overview)
+<img src="README_files/figure-markdown_github/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /> [back](#overview)
 
 ### examples non ultrametictree
 
@@ -288,7 +414,7 @@ nodelabels(text=nodetext)
 edgelabels(tree2$edge.length, bg="black", col="white", font=2)
 ```
 
-<img src="README_files/figure-markdown_github/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_github/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" />
 
 ``` r
 
@@ -351,7 +477,7 @@ nodelabels(text=nodetext)
 edgelabels(tree2$edge.length, bg="black", col="white", font=2)
 ```
 
-<img src="README_files/figure-markdown_github/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_github/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" />
 
 ``` r
 
@@ -539,7 +665,7 @@ nodelabels(text=nodetext)
 edgelabels(phylotree$edge.length, bg="black", col="white", font=2)
 ```
 
-<img src="README_files/figure-markdown_github/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_github/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" />
 
 ``` r
 data.inc
@@ -723,7 +849,7 @@ nodelabels(text=nodetext)
 edgelabels(tree2$edge.length, bg="black", col="white", font=2)
 ```
 
-<img src="README_files/figure-markdown_github/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_github/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" />
 
 ``` r
 
