@@ -79,7 +79,7 @@ phylo2chaolabphy<-function(phylo)
 #' @examples
 #' data(treesample)
 #' newphy<-phylo2phytree(treesample)
-#' leaves <- newphy$leaves
+#' leaves <- newphy$tips
 #' nodes<- newphy$nodes
 #' treedata<-newphy$phytree
 #' treeH<-newphy$treeH
@@ -114,7 +114,7 @@ phylo2phytree<-function(phylo){
   ###combine leave node to complete data
   phylo.t.nodes<-phylo.t.nodes %>% select(parent,node,length.new,label.new) %>% rename(branch.length=length.new,label=label.new)
   phylo.t.all<-rbind(phylo.t.leaves,phylo.t.nodes)
-  phylo.t.all<-phylo.t.all %>% mutate(tgroup=ifelse(node<phylo.root,"leaves",ifelse(node==phylo.root,"Root","nodes")))
+  phylo.t.all<-phylo.t.all %>% mutate(tgroup=ifelse(node<phylo.root,"Tip",ifelse(node==phylo.root,"Root","Inode")))
 
 
   ##add treeH
@@ -127,7 +127,7 @@ phylo2phytree<-function(phylo){
   node.age<-sapply(1:length(edgelength),function(x){ifelse(isTRUE(all.equal(edgelength[x],treeH)),0,treeH-edgelength[x])})
   phylo.t.all<-phylo.t.all %>% mutate(node.age=node.age)
 
-  z <- list("leaves"=data.leaves, "nodes"=data.nodes, "phytree"=phylo.t.all,"treeH"=treeH)
+  z <- list("tips"=data.leaves, "nodes"=data.nodes, "phytree"=phylo.t.all,"treeH"=treeH)
   class(z) <- "chaophytree"
   return(z)
 

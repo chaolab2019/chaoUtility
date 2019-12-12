@@ -53,6 +53,24 @@
 "phybird"
 
 
+#' phybird.new data:
+#'
+#' A list containing phy tree information, abun, inci
+#' diamonds.
+#'
+#' @format A list with 5 elements:
+#' \describe{
+#'   \item{tre}{phy tree information, character}
+#'   \item{abun}{abundance data, data frame}
+#'   \item{inci}{incidenece data, list}
+#'   \item{phylo}{phylo tree information, phylo}
+#'   \item{chaophytree}{tree and abundance combined data, tibble, new format}
+#'   ...
+#' }
+#' @source
+"phybird.new"
+
+
 #' phyincisimple data:
 #'
 #' A list containing inci,phy tree information
@@ -68,3 +86,37 @@
 #' }
 #' @source
 "phyincisimple"
+
+
+#' phyincisimple data:
+#'
+#' A list containing inci,phy tree information
+#' diamonds.
+#'
+#' @format A list with 5 elements:
+#' \describe{
+#'   \item{inci.simple.data}{incidence data, matrix}
+#'   \item{tree.simple}{phylo tree information, phylo}
+#'   \item{tree.simple.phytree}{chaophytree data, chaophytree: new format}
+#'
+#'   ...
+#' }
+#' @source
+"phyincisimple.new"
+
+
+#' phyBranchAL.r data:
+#'
+#' A list containing inci,phy tree information
+#' diamonds.
+#'
+#' @format A list with 2 elements:
+#' \describe{
+#'   \item{abudata}{abundance data, vector}
+#'   \item{tree}{phylo tree information, phylo}
+#'
+#'
+#'   ...
+#' }
+#' @source
+"phyincisimple.new"

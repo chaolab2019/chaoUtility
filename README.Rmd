@@ -41,7 +41,11 @@ phylogeny fucntions:
 -[`phyExpandData()`](#phyexpanddata) : input abundance data, label,chaophytree object, return tibble with abundance or [incidence data](#examples-incidence-simple-data).
 
 
--[`phylengthbyT()`](#phylengthbyt) : input vector of ageT, chaophytree object, return matrix with label and new branch.length (default `rootExtend =F` ,if `rootExtend=T and ageT>treeH `, root.length=ageT-treeH), [non ultrametric tree example](#examples-non-ultrametric-tree-by-reference-t)
+-[`phylengthbyT()`](#phylengthbyt) : input vector of ageT, chaophytree object, return matrix with label and new branch.length (default `rootExtend =T` ,if `rootExtend=T and ageT>treeH `, root.length=ageT-treeH), [non ultrametric tree example](#examples-non-ultrametric-tree-by-reference-t)
+
+-[`phyBranchAL()`](#phybranchal) : input abundance data,phylo object,vector of ageTs,  return Chaophyabu object  (default `rootExtend =T` ,`removeAbu0=T`)
+
+
 
 -`phylo2chaolabphy()`
 
@@ -146,7 +150,7 @@ class(newphy)
 
 
 ```{r }
-newphy$leaves
+newphy$tips
 
 newphy$nodes
 
@@ -162,7 +166,7 @@ plot(treesample)
 tiplabels()
 nodelabels()
 library(dplyr)
-nodetext<-newphy$phytree %>% filter(tgroup!="leaves") %>% pull(label)
+nodetext<-newphy$phytree %>% filter(tgroup!="Tip") %>% pull(label)
 nodelabels(text=nodetext,adj=c(0,2.2))
 edgelabels(treesample$edge.length, bg="black", col="white", font=2)
 ```
@@ -180,7 +184,7 @@ library(chaoUtility)
 tree2.phytree<-phylo2phytree(tree2)
 
 library(dplyr)
-nodetext<-tree2.phytree$phytree %>% filter(tgroup!="leaves") %>% pull(label)
+nodetext<-tree2.phytree$phytree %>% filter(tgroup!="Tip") %>% pull(label)
 plot(tree2)
 nodelabels(text=nodetext)
 edgelabels(tree2$edge.length, bg="black", col="white", font=2)
@@ -209,7 +213,7 @@ library(chaoUtility)
 tree2.phytree<-phylo2phytree(tree2)
 
 library(dplyr)
-nodetext<-tree2.phytree$phytree %>% filter(tgroup!="leaves") %>% pull(label)
+nodetext<-tree2.phytree$phytree %>% filter(tgroup!="Tip") %>% pull(label)
 plot(tree2)
 nodelabels(text=nodetext)
 edgelabels(tree2$edge.length, bg="black", col="white", font=2)
@@ -233,10 +237,10 @@ tree2.phytree$nodes
 
 ```{r }
 library(chaoUtility)
-data(phybird)
-bird.abu <- phybird$abun
-bird.lab <- rownames(phybird$abun)
-bird.phy <- phybird$chaophytree
+data(phybird.new)
+bird.abu <- phybird.new$abun
+bird.lab <- rownames(phybird.new$abun)
+bird.phy <- phybird.new$chaophytree
 
 bird.abu
 
@@ -263,16 +267,16 @@ phy.inc<-phyincisimple$tree.simple.phytree
 ### examples incidence simple data
 ```{r }
 library(chaoUtility)
-data(phyincisimple)
-data.inc <- phyincisimple$inci.simple.data
+data(phyincisimple.new)
+data.inc <- phyincisimple.new$inci.simple.data
 data.lab<-rownames(data.inc)
-phy.inc<-phyincisimple$tree.simple.phytree
+phy.inc<-phyincisimple.new$tree.simple.phytree
 
 
 
-phylotree<-phyincisimple$tree.simple
+phylotree<-phyincisimple.new$tree.simple
 plot(phylotree)
-nodetext<-phy.inc$phytree %>% filter(tgroup!="leaves") %>% pull(label)
+nodetext<-phy.inc$phytree %>% filter(tgroup!="Tip") %>% pull(label)
 nodelabels(text=nodetext)
 edgelabels(phylotree$edge.length, bg="black", col="white", font=2)
 ```
@@ -305,7 +309,7 @@ bird.phy <- phybird$chaophytree
 
 bird.phy$treeH
 
-phyLengthbyT(Ts=c(90,75,55), phy=bird.phy, datatype="abundance",rootExtend=T)
+phyLengthbyT(Ts=c(90,75,55), phy=bird.phy, datatype="abundance")
 ```
 
 
@@ -333,7 +337,7 @@ phytree$treeH
 phyLengthbyT(Ts=c(75,55,50), phy=phytree, datatype="abundance",rootExtend=T)
 
 library(dplyr)
-nodetext<-phytree$phytree %>% filter(tgroup!="leaves") %>% pull(label)
+nodetext<-phytree$phytree %>% filter(tgroup!="Tip") %>% pull(label)
 plot(tree2)
 nodelabels(text=nodetext)
 edgelabels(tree2$edge.length, bg="black", col="white", font=2)
@@ -341,20 +345,44 @@ edgelabels(tree2$edge.length, bg="black", col="white", font=2)
 as.data.frame(phytree$phytree)
 ```
 
-library(chaoUtility)
-phytree<-phylo2phytree(tree2)
 
-phytree$treeH
-
-phyLengthbyT(Ts=c(75,55,50), phy=phytree, datatype="abundance",rootExtend=T)
+[back](#overview)
 
 
-library(dplyr)
-nodetext<-phytree$phytree %>% filter(tgroup!="leaves") %>% pull(label)
-plot(tree2)
-nodelabels(text=nodetext)
-edgelabels(tree2$edge.length, bg="black", col="white", font=2)
+## #phybranchal
 
-as.data.frame(phytree$phytree)
+
+### EXAMPLES
+
+```{r }
+ data(AbuALdata)
+ adata<-AbuALdata$abudata
+ atree<-AbuALdata$tree
+ vdata<-adata$EM
+ names(vdata)<-rownames(adata)
+ vdata
+ 
+ refTs<-c(400,250,100)
+ result<-phy_BranchAL_Abu(atree,vdata,datatype="abundance",refTs)
+ 
+ ##final branch.abu:removed abu=0
+ treeNabu<-result$treeNabu
+ treeNabu %>% print(n = Inf)
+ 
+ ##final treeH:removed abu=0
+ result$treeH
+ 
+ ##final branch.length:removed abu=0
+ result$BLbyT
+ 
+ ####result$treeNabu is an object of tbl_tree could change to phylo
+ tlb2phylo<-as.phylo(treeNabu)
+ plot(tlb2phylo)
+ 
+ 
+ ###this is the original tree
+ plot(atree)
+ 
 ```
+
 [back](#overview)

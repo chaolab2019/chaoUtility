@@ -18,7 +18,7 @@ R code for phylo to phytree function, we defind chaophytree objects
 \examples{
 data(treesample)
 newphy<-phylo2phytree(treesample)
-leaves <- newphy$leaves
+leaves <- newphy$tips
 nodes<- newphy$nodes
 treedata<-newphy$phytree
 treeH<-newphy$treeH

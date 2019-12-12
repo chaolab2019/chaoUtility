@@ -1,4 +1,4 @@
-phyLengthbyT_ <- function(t_1, phy, datatype="abundance",rootExtend=F){
+phyLengthbyT_ <- function(t_1, phy, datatype="abundance",rootExtend=T){
   if (!inherits(phy, "chaophytree"))
     stop("Non convenient data : only for chaophytree object")
 
@@ -12,13 +12,13 @@ phyLengthbyT_ <- function(t_1, phy, datatype="abundance",rootExtend=F){
 
   if(datatype=="abundance"){
     phytable<-phy$phytree
-    phytable<-phytable %>% mutate(branch.height=ifelse(tgroup=="leaves",branch.length,node.age))
-    phytable<-phytable %>% mutate(cumsum.length=ifelse(tgroup=="leaves",branch.length,node.age+branch.length))
+    phytable<-phytable %>% mutate(branch.height=ifelse(tgroup=="Tip",branch.length,node.age))
+    phytable<-phytable %>% mutate(cumsum.length=ifelse(tgroup=="Tip",branch.length,node.age+branch.length))
     phytable$t1<-t_1
     phytable<-phytable %>% mutate(tmp=cumsum.length-t_1)
     phytable<-phytable %>% mutate(branch.length.new=ifelse(tgroup=="Root",rootlength,
                                                            ifelse(tmp<0,branch.length,
-                                                                  ifelse(tgroup=="leaves",branch.length-tmp,
+                                                                  ifelse(tgroup=="Tip",branch.length-tmp,
                                                                          ifelse(node.age>t1,0,t1-node.age)))))
 
     branch.length.byT<-phytable %>% pull(branch.length.new)
@@ -66,7 +66,7 @@ phyLengthbyT_ <- function(t_1, phy, datatype="abundance",rootExtend=F){
 #' phyLengthbyT(Ts=c(75,55),  phy=bird.phy, datatype="abundance")
 #'
 #' @export
-phyLengthbyT<- function(Ts, phy, datatype="abundance",rootExtend=F){
+phyLengthbyT<- function(Ts, phy, datatype="abundance",rootExtend=T){
   if (!inherits(phy, "chaophytree"))
     stop("Non convenient data : only for chaophytree object")
 

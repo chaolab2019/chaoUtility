@@ -4,7 +4,7 @@
 \alias{phyLengthbyT}
 \title{Calculate branch length by reference ageT}
 \usage{
-phyLengthbyT(Ts, phy, datatype = "abundance", rootExtend = F)
+phyLengthbyT(Ts, phy, datatype = "abundance", rootExtend = T)
 }
 \arguments{
 \item{phy}{a phylogenetic tree with \code{"chaophytree"} class.\cr}

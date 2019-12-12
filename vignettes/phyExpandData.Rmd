@@ -34,10 +34,10 @@ library(chaoUtility)
 
 ```{r }
 library(chaoUtility)
-data(phybird)
-bird.abu <- phybird$abun
-bird.lab <- rownames(phybird$abun)
-bird.phy <- phybird$chaophytree
+data(phybird.new)
+bird.abu <- phybird.new$abun
+bird.lab <- rownames(phybird.new$abun)
+bird.phy <- phybird.new$chaophytree
 
 phyExpandData(bird.abu, labels=bird.lab, phy=bird.phy, datatype="abundance")
 

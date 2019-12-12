@@ -7,8 +7,8 @@ phyExpandData_ <- function(x, labels, phy, datatype="abundance"){
   if(datatype=="incidence_freq" | datatype=="incidence")
     stop('only support datatype="incidence_raw"')
 
-  my_match <- match(labels, names(phy$leaves))
-  if(sum(is.na(my_match)) > 0) stop("Argument labels and tree leaves not matach")
+  my_match <- match(labels, names(phy$tips))
+  if(sum(is.na(my_match)) > 0) stop("Argument labels and tree Tip not matach")
 
 
 
@@ -17,8 +17,8 @@ phyExpandData_ <- function(x, labels, phy, datatype="abundance"){
     tmp<-data.frame(label=labels,x=x)
     tmp$label<-as.character(tmp$label)
     treeNdata<-full_join(phy$phytree, tmp, by="label")
-    inodelist<-treeNdata %>% filter(tgroup !="leaves") %>% pull(node)
-    names(inodelist)<-treeNdata %>% filter(tgroup !="leaves") %>% pull(label)
+    inodelist<-treeNdata %>% filter(tgroup !="Tip") %>% pull(node)
+    names(inodelist)<-treeNdata %>% filter(tgroup !="Tip") %>% pull(label)
     inode_x<-sapply(inodelist,function(x){offspring(treeNdata,x,tiponly=T) %>% select(x) %>% sum()})
 
     tmp1<-data.frame(label=names(inode_x),branch.abun=inode_x)
@@ -43,8 +43,8 @@ phyExpandData_ <- function(x, labels, phy, datatype="abundance"){
       tmp<-data.frame(label=labels,x=i)
       tmp$label<-as.character(tmp$label)
       tmp.treeNdata<-full_join(phy$phytree, tmp, by="label")
-      inodelist<-tmp.treeNdata %>% filter(tgroup !="leaves") %>% pull(node)
-      names(inodelist)<-tmp.treeNdata %>% filter(tgroup !="leaves") %>% pull(label)
+      inodelist<-tmp.treeNdata %>% filter(tgroup !="Tip") %>% pull(node)
+      names(inodelist)<-tmp.treeNdata %>% filter(tgroup !="Tip") %>% pull(label)
       ivalue_each<-sapply(inodelist,function(x){offspring(tmp.treeNdata,x,tiponly=T) %>% select(x) %>% max()})
     })
     inode_x <- rowSums(inode_each)
@@ -71,11 +71,11 @@ phyExpandData_ <- function(x, labels, phy, datatype="abundance"){
 #' @param datatype data type of input data: individual-based abundance data (\code{datatype = "abundance"}), species by sampling-units incidence matrix (\code{datatype = "incidence_raw"}).
 #' @return a tibble tree with abundances.
 #' @examples
-#' data(phybird)
-#' bird.abu <- phybird$abun
-#' bird.inc <- phybird$inci
-#' bird.lab <- rownames(phybird$abun)
-#' bird.phy <- phybird$chaophytree
+#' data(phybird.new)
+#' bird.abu <- phybird.new$abun
+#' bird.inc <- phybird.new$inci
+#' bird.lab <- rownames(phybird.new$abun)
+#' bird.phy <- phybird.new$chaophytree
 #' phyExpandData(bird.abu, labels=bird.lab, phy=bird.phy, datatype="abundance")
 #' phyExpandData(bird.inc, labels=bird.lab, phy=bird.phy, datatype="incidence_raw")
 #'
