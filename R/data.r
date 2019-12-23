@@ -10,7 +10,7 @@
 #'   \item{inci}{incidenece data, list}
 #'   ...
 #' }
-#' @source
+
 "bird"
 
 #' incidence freq data:
@@ -18,7 +18,7 @@
 #'
 #' @format data.frame:
 #'
-#' @source
+
 "incdata"
 
 
@@ -30,7 +30,7 @@
 #'
 #' @format A phylo object:
 #'
-#' @source
+
 "treesample"
 
 
@@ -49,7 +49,7 @@
 #'   \item{chaophytree}{tree and abundance combined data, tibble}
 #'   ...
 #' }
-#' @source
+
 "phybird"
 
 
@@ -67,7 +67,7 @@
 #'   \item{chaophytree}{tree and abundance combined data, tibble, new format}
 #'   ...
 #' }
-#' @source
+
 "phybird.new"
 
 
@@ -84,7 +84,7 @@
 #'
 #'   ...
 #' }
-#' @source
+
 "phyincisimple"
 
 
@@ -101,7 +101,7 @@
 #'
 #'   ...
 #' }
-#' @source
+
 "phyincisimple.new"
 
 
@@ -118,5 +118,5 @@
 #'
 #'   ...
 #' }
-#' @source
+
 "phyincisimple.new"

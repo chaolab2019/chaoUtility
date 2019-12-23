@@ -107,120 +107,120 @@ data(bird)
 bird.abun<- bird$abun
 Boot_p(bird$abun,zero=FALSE,Bootype="SAR",datatype="abundance",rho=0.8)
 $North.site
- [1] 39  3  1  5  4  5 11  2  2  5 10  1  9 12  1  2 17 12  2  3  7  1 16
-[24]  8  2  2 17  2  1
+ [1] 37  2  1  7  4  3 13  1  2  6 11  2 12 11  2  2 13 14  1  2  7  2 17
+[24]  7  3  4 13  2  1
 
 $South.site
- [1]  2 15 30  3  2  3  6  1  6 30  6 11  1  4  6  7  7 17  4 11 12  2 15
-[24]  4 18  2  3  6  6  1  3 20 10  3  7  3  1 17  2
+ [1]  4 18 30  2  2  1  5  2  6 32  5 10  1  5  5  6 10 16  3 12  8  1 14
+[24]  4 16  2  2  8  7  2  4 18 14  2  6  3  2 17  2
 
 data(incdata)
 Boot_p(incdata,zero=FALSE,Bootype="SAR",datatype="incidence",rho=0.8)
 $Monsoon
 plots                                                                   
-  191     8    10     4    29     1    70     1     1     7    11     2 
+  191    10     9     4    31     1    64     1     1     8     9     3 
                                                                         
-    2     1     4    49     7     1     3    54     1     6    12    60 
+    1     2     2    46     7     3     1    52     4     8    16    61 
                                                                         
-  132    20     2    15     4     3     7     2     1   104     2     1 
+  129    22     0    15     3     2     8     2     1   101     2     1 
                                                                         
-    3     2     4     2    25     2     3    28     6     3    13     4 
+    3     2     7     2    26     1     3    30     7     2    14     4 
                                                                         
-    2     4    52     6    77    31     2     2     3     6     3     6 
+    1     5    44     7    84    36     3     2     3     6     5     4 
                                                                         
-    4    16     8    15    33     2     1    34     4    26     1    39 
+    4    19     7    16    26     2     2    37     4    29     1    40 
                                                                         
-    4     2    69    10     2    35    30    21    17    30    67     3 
+    4     3    72     7     2    31    35    21    15    33    67     2 
                                                                         
-    2    49     7     1     2    12     1   121    10    61    31   144 
+    2    47     4     2     3    12     1   119    10    66    33   146 
                                                                         
-    1     2     1     2     1     4    12   112    71     2    83    21 
+    2     1     0     2     2     6    12   107    71     2    78    20 
                                                                         
-    6     7     3     4    16    53    35     4     7     8    97    20 
+    6     6     3     4    17    52    33     7     5     8    95    18 
                                                                         
-   11     3   104    54    57     1     2     4     1     3     2    15 
+    8     4   108    54    58     2     2     4     1     4     3    13 
                                                                         
-    0    10     2     1    33    68     5    49     8     5    33     2 
+    2     9     2     1    33    64     5    46     6     4    31     2 
                                                                         
-   14    90     2    83    20    45     1     0    69    91    20     2 
+   12    93     3    79    23    45     2     2    74    91    13     2 
                                                                         
-    3    41     5     9    11     1     9     3    12    46    89     6 
+    2    42     5    11    16     1     8     1    11    49    91     3 
                                                                         
-   27     2    22    13   107     2     1     6    22    43    37     9 
+   28     2    19    14   103     2     2     4    19    47    40    13 
                                                                         
-   16     7    22     2     2     3   119     2     5     4    14    35 
+   17     7    31     5     3     4   116     2     8     4    16    32 
                                                                         
-    2     3    19    50   184    58     6     2    36    66     2    41 
+    2     4    20    46   186    59     5     1    39    64     2    43 
                                                                         
-   50     2     1    25     2     4     6    29    68   112     1     2 
+   50     2     2    24     2     6     7    27    67   118     2     2 
                                                                         
-    3     2    12     2     2     3    37   115     3    12    25     9 
+    3     2    12     3     1     4    40   108     4     7    25     9 
                                                                         
-   12     3     3    46     2     5    59     7    14    10    48     9 
+   10     3     3    40     2     6    53     5    14     9    51     8 
                                                                         
-   14     5     1     5     2     2     2     2     2     2    17    21 
+   15     6     2     6     1     4     2     2     1     2    20    17 
                                                                         
-   19     6     9     1   142    96    73     2    72     2     2     3 
+   21     7    10     2   140    97    73     2    79     2     2     3 
                                                                         
-   35     2     8     2    12     1     2     4     3    12    28   157 
+   36     2    11     2    12     1     0     4     3    10    33   157 
                                                                         
-    4     2     1    16     2    31     2     1     2     1    50    30 
+    4     2     2    21     2    32     2     2     2     0    45    35 
                                                                         
-    2     2     7    33     7     2     4     3    45     3    41    16 
+    1     1     8    37     6     1     3     4    49     1    35    16 
                                                                         
-    7     2     4     4     1     2    47    20    63    14     4    17 
+    6     0     5     4     2     3    46    17    58    17     3    15 
                                                                         
-   11     1    70    14    59    14     5     2     2     4     2    10 
+    9     2    65    16    62    13     4     2     1     6     2    11 
                                                                         
-   50     2    29     2   110     1     2     2     1     1     2     2 
+   44     1    26     2   106     1     2     2     1     2     2     2 
                                                             
-    2     2     2     2     2     1     2     1     1     2 
+    1     2     2     1     2     1     2     2     2     2 
 
 $Upper.cloud
 plots                                                                   
-  153     2     3     2     9    24    12     8    12    37    12     1 
+  153     1     3     1     9    24    13     7    14    36    15     2 
                                                                         
-    2     2     1    32     2     2     7     9    33     3     1    34 
+    1     2     2    35     2     1     6     9    33     3     4    33 
                                                                         
-    2     5    62    43     3     1    10     2    42     2     3    54 
+    2     5    59    54     2     2     8     1    40     2     4    50 
                                                                         
-    8     3     7    38    54    77    58     3     6    45     2    65 
+    8     2     9    40    51    79    59     1     7    41     1    63 
                                                                         
-    1     2     2     3    48     4     4     4     2     3     3    29 
+    1     2     1     3    47     3     5     3     2     3     3    32 
                                                                         
-   53    48    90    15     8    33     9     6    12     3     1     2 
+   59    56    88    17     8    31     9     4    10     1     2     0 
                                                                         
-    2     5     3     5    60    36    10     7     3     2     2    18 
+    1     7     3     6    63    36    11     5     2     4     2    20 
                                                                         
-    5    65     3     2    46    17     4     3     2     0    10     1 
+    4    66     2     2    44    18     1     2     2     2    11     2 
                                                                         
-    5     5     1     0    31     1    11    39     2    14     1    27 
+    4     5     1     2    29     2     6    38     1    16     2    25 
                                                                         
-   12    24     2    14     2     3     1    21    43    63     0     3 
+   15    24     2    11     2     3     2    20    40    65     3     3 
                                                                         
-    5    16   145     2     1     3    12     9     2     4     2     1 
+    5    13   142     2     2     3    11    11     2     2     2     1 
                                                                         
-   18    11     7    24     2     2     3     1    26     2     1     5 
+   16    12     7    24     2     2     3     2    26     1     2     3 
                                                                         
-    7    18     2    13     2    11     2    10     4     4     4    16 
+    7    18     2    15     1    12     2    11     3     3     4    13 
                                                                         
-    4    49     3     7     5     2     6     6     5     4     4     3 
+    3    50     1    10     5     2     6     6     8     5     4     2 
                                                                         
-    2     4     4     3    42    81     2     2     4     6    11     1 
+    2     3     3     2    41    81     2     2     4     5     9     1 
                                                                         
-    1     4    27    17     2     2     5     6    40     3     7     3 
+    1     4    19    16     2     2     5     7    40     3     6     2 
                                                                         
-    4     1     2    41    53     7     5    13     3    39    51     2 
+    4     2     1    37    50     9     5    15     5    44    53     1 
                                                                         
-   93     5     5     6    35    19     4    13     8    68     2     1 
+   96     6     3     6    38    22     3    11     7    69     3     2 
                                                                         
-  102    91     1     9     4     5     9     1    11     5     2     4 
+  107    88     2    10     4     4    10     2    13     6     0     5 
                                                                         
-   29     3    12     7     3     2     1     1    22     4    27     2 
+   24     2     9     6     2     1     2     2    22     7    23     1 
                                                                         
-    2     1     2     1     2     2     2     2     2     2     1     2 
+    2     2     0     2     0     2     2     2     1     1     1     2 
       
-    2 
+    1 
 ```
 
 with replacement:One
@@ -887,6 +887,147 @@ as.data.frame(phytree$phytree)
 \#phybranchal
 -------------
 
+### EXAMPLES-improve performance
+
+``` r
+ data(AbuALdata)
+ adata<-AbuALdata$abudata
+ atree<-AbuALdata$tree
+ vdata<-adata$EM
+ names(vdata)<-rownames(adata)
+ vdata
+     Juniperus_oxycedrus        Clematis_flammula         Silene_canescens 
+                       0                        0                        0 
+            Salsola_kali      Polygonum_maritimum   Phillyrea_angustifolia 
+                      72                       14                        0 
+    Helichrysum_stoechas       Otanthus_maritimus Centaurea_sphaerocephala 
+                       0                       16                        0 
+        Sonchus_bulbosus        Anthemis_maritima    Pycnocomon_rutifolium 
+                       0                        9                        0 
+        Lonicera_implexa       Eryngium_maritimum      Echinophora_spinosa 
+                       0                        8                       11 
+      Pseudorlaya_pumila          Rubia_peregrina     Crucianella_maritima 
+                       0                        0                        0 
+           Prasium_majus          Teucrium_flavum       Plantago_coronopus 
+                       0                        0                        1 
+   Calystegia_soldanella         Lotus_cytisoides         Ononis_variegata 
+                      10                        0                        2 
+     Medicago_littoralis          Medicago_marina        Rhamnus_alaternus 
+                       0                        1                        0 
+            Quercus_ilex      Euphorbia_terracina        Chamaesyce_peplis 
+                       0                        0                       36 
+      Pistacia_lentiscus           Daphne_gnidium           Cistus_incanus 
+                       0                        0                        0 
+         Cakile_maritima            Smilax_aspera     Pancratium_maritimum 
+                      81                        0                        6 
+   Asparagus_acutifolius            Cyperus_kalli      Lophocloa_pubescens 
+                       0                        1                        0 
+          Lagurus_ovatus    Sporobolus_virginicus          Bromus_diandrus 
+                       0                       42                        0 
+       Cutandia_maritima       Ammophila_arenaria       Vulpia_fasciculata 
+                       3                        0                        0 
+          Elymus_farctus 
+                      60 
+ 
+ refTs<-c(400,250,100)
+ result<-phyBranchAL_Abu(atree,vdata,datatype="abundance",refTs)
+ 
+ ##final branch.abu:removed abu=0
+ treeNabu<-result$treeNabu
+ treeNabu %>% print(n = Inf)
+# A tibble: 32 x 8
+   parent  node branch.length tgroup label node.age branch.height
+    <int> <int>         <dbl> <chr>  <chr>    <dbl>         <dbl>
+ 1     21     1          97.5 Tip    Elym~      0            97.5
+ 2     21     2          97.5 Tip    Cuta~      0            97.5
+ 3     21     3          97.5 Tip    Spor~      0            97.5
+ 4     20     4         146.  Tip    Cype~      0           146. 
+ 5     19     5         195   Tip    Panc~      0           195  
+ 6     23     6         195   Tip    Caki~      0           195  
+ 7     24     7         162.  Tip    Cham~      0           162. 
+ 8     25     8          65   Tip    Medi~      0            65  
+ 9     25     9          65   Tip    Onon~      0            65  
+10     28    10          97.5 Tip    Caly~      0            97.5
+11     28    11          97.5 Tip    Plan~      0            97.5
+12     30    12          43.3 Tip    Echi~      0            43.3
+13     30    13          43.3 Tip    Eryn~      0            43.3
+14     31    14          97.5 Tip    Anth~      0            97.5
+15     31    15          97.5 Tip    Otan~      0            97.5
+16     32    16         130   Tip    Poly~      0           130  
+17     32    17         130   Tip    Sals~      0           130  
+18     18    18          NA   Root   poal~    292.          292. 
+19     18    19          97.5 Inode  I1       195           292. 
+20     19    20          48.8 Inode  I2       146.          195  
+21     20    21          48.8 Inode  poac~     97.5         146. 
+22     18    22          65   Inode  I4       228.          292. 
+23     22    23          32.5 Inode  I5       195           228. 
+24     23    24          32.5 Inode  I6       162.          195  
+25     24    25          97.5 Inode  I7        65           162. 
+26     22    26          32.5 Inode  I8       195           228. 
+27     26    27          32.5 Inode  I9       162.          195  
+28     27    28          65   Inode  I10       97.5         162. 
+29     27    29          32.5 Inode  I11      130           162. 
+30     29    30          86.7 Inode  apia~     43.3         130  
+31     29    31          32.5 Inode  aste~     97.5         130  
+32     26    32          65   Inode  cary~    130           195  
+# ... with 1 more variable: branch.abun <int>
+ 
+ ##final treeH:removed abu=0
+ result$treeH
+[1] 292.5
+ 
+ ##final branch.length:removed abu=0
+ result$BLbyT
+                           T400      T250      T100
+Elymus_farctus         97.50000  97.50000  97.50000
+Cutandia_maritima      97.50000  97.50000  97.50000
+Sporobolus_virginicus  97.50000  97.50000  97.50000
+Cyperus_kalli         146.25000 146.25000 100.00000
+Pancratium_maritimum  195.00000 195.00000 100.00000
+Cakile_maritima       195.00000 195.00000 100.00000
+Chamaesyce_peplis     162.50000 162.50000 100.00000
+Medicago_marina        65.00000  65.00000  65.00000
+Ononis_variegata       65.00000  65.00000  65.00000
+Calystegia_soldanella  97.50000  97.50000  97.50000
+Plantago_coronopus     97.50000  97.50000  97.50000
+Echinophora_spinosa    43.33333  43.33333  43.33333
+Eryngium_maritimum     43.33333  43.33333  43.33333
+Anthemis_maritima      97.50000  97.50000  97.50000
+Otanthus_maritimus     97.50000  97.50000  97.50000
+Polygonum_maritimum   130.00000 130.00000 100.00000
+Salsola_kali          130.00000 130.00000 100.00000
+poales_to_asterales   107.50000   0.00000   0.00000
+I1                     97.50000  55.00000   0.00000
+I2                     48.75000  48.75000   0.00000
+poaceae                48.75000  48.75000   2.50000
+I4                     65.00000  22.50000   0.00000
+I5                     32.50000  32.50000   0.00000
+I6                     32.50000  32.50000   0.00000
+I7                     97.50000  97.50000  35.00000
+I8                     32.50000  32.50000   0.00000
+I9                     32.50000  32.50000   0.00000
+I10                    65.00000  65.00000   2.50000
+I11                    32.50000  32.50000   0.00000
+apiaceae               86.66667  86.66667  56.66667
+asteraceae             32.50000  32.50000   2.50000
+caryophyllales         65.00000  65.00000   0.00000
+ 
+ ####result$treeNabu is an object of tbl_tree could change to phylo
+ tlb2phylo<-as.phylo(treeNabu)
+ plot(tlb2phylo)
+```
+
+<img src="README_files/figure-markdown_github/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" />
+
+``` r
+ 
+ 
+ ###this is the original tree
+ plot(atree)
+```
+
+<img src="README_files/figure-markdown_github/unnamed-chunk-18-2.png" width="672" style="display: block; margin: auto;" />
+
 ### EXAMPLES
 
 ``` r
@@ -1054,7 +1195,7 @@ Calystegia_soldanella    Plantago_coronopus   Echinophora_spinosa
  plot(tlb2phylo)
 ```
 
-<img src="README_files/figure-markdown_github/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_github/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" />
 
 ``` r
  
@@ -1063,6 +1204,6 @@ Calystegia_soldanella    Plantago_coronopus   Echinophora_spinosa
  plot(atree)
 ```
 
-<img src="README_files/figure-markdown_github/unnamed-chunk-18-2.png" width="672" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_github/unnamed-chunk-19-2.png" width="672" style="display: block; margin: auto;" />
 
 [back](#overview)

@@ -2,10 +2,12 @@
 
 export(Boot_p)
 export(check_datatype)
+export(phyBranchAL_Abu)
 export(phyExpandData)
 export(phyLengthbyT)
 export(phy_BranchAL_Abu)
 export(phylo2chaolabphy)
 export(phylo2phytree)
+import(ape)
 import(dplyr)
 import(tidytree)

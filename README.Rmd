@@ -351,6 +351,40 @@ as.data.frame(phytree$phytree)
 
 ## #phybranchal
 
+### EXAMPLES-improve performance
+
+```{r }
+ data(AbuALdata)
+ adata<-AbuALdata$abudata
+ atree<-AbuALdata$tree
+ vdata<-adata$EM
+ names(vdata)<-rownames(adata)
+ vdata
+ 
+ refTs<-c(400,250,100)
+ result<-phyBranchAL_Abu(atree,vdata,datatype="abundance",refTs)
+ 
+ ##final branch.abu:removed abu=0
+ treeNabu<-result$treeNabu
+ treeNabu %>% print(n = Inf)
+ 
+ ##final treeH:removed abu=0
+ result$treeH
+ 
+ ##final branch.length:removed abu=0
+ result$BLbyT
+ 
+ ####result$treeNabu is an object of tbl_tree could change to phylo
+ tlb2phylo<-as.phylo(treeNabu)
+ plot(tlb2phylo)
+ 
+ 
+ ###this is the original tree
+ plot(atree)
+ 
+```
+
+
 
 ### EXAMPLES
 
