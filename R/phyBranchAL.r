@@ -159,6 +159,7 @@ phyBranchAL_Abu<-function(phylo,data, datatype="abundance",refT=0,rootExtend=T,r
     phylo.t <- tidytree::as_tibble(subtree)
 
 
+
     # phylo.t.1<-phylo.t %>% mutate(tgroup=case_when(node<phylo.root ~"Tip",
     #                                                node==phylo.root ~"Root",
     #                                                TRUE ~"Inode"),
@@ -166,12 +167,12 @@ phyBranchAL_Abu<-function(phylo,data, datatype="abundance",refT=0,rootExtend=T,r
     #                                                  label=="" ~paste("I",node-phylo.root,sep=""),
     #                                                  TRUE ~ label)) %>% select(-label) %>% rename(label=newlabel)
 
-
-    phylo.t.1<-phylo.t %>% mutate(tgroup=case_when(node<phylo.root ~"Tip",
+    phylo.t.1<-phylo.t %>% mutate(branch.length=replace(branch.length, is.na(branch.length),0),
+                                  tgroup=case_when(node<phylo.root ~"Tip",
                                                    node==phylo.root ~"Root",
                                                    TRUE ~"Inode"),
-                                  newlabel=case_when(node-phylo.root==0 & label =="" ~ "Root",
-                                                     label=="" ~paste("I",node-phylo.root,sep=""),
+                                  newlabel=case_when(node-phylo.root==0 & (label ==""|is.na(label)) ~ "Root",
+                                                     label==""|is.na(label) ~paste("I",node-phylo.root,sep=""),
                                                      TRUE ~ label ),
                                   edgelengthv=edgelength,
                                   node.age=case_when(edgelengthv==treeH~0,
@@ -188,10 +189,12 @@ phyBranchAL_Abu<-function(phylo,data, datatype="abundance",refT=0,rootExtend=T,r
     inode_x<-sapply(inodelist,function(x){offspring(treeNdata,x,tiponly=T) %>% select(x) %>% sum()})
 
     tmp_all<-bind_rows(tibble(label=names(subdata),branch.abun=subdata),tibble(label=names(inode_x),branch.abun=inode_x))
-    treeNdata<-full_join(treeNdata, tmp_all, by="label") %>% select(-x,-edgelengthv)
+    treeNdata<-full_join(treeNdata, tmp_all, by="label") %>% select(-x,-edgelengthv,-node.age)
 
     phyL<-sapply(refT,function(y) phyL_Abu_T_(treeNdata,y,rootExtend,treeH))
     colnames(phyL)<-paste("T",refT,sep="")
+    treeNdata<-treeNdata %>% select(-branch.height)
+
 
     z <- list("treeNabu"=treeNdata,"treeH"=treeH,"BLbyT"=phyL)
     class(z) <- "Chaophyabu"
