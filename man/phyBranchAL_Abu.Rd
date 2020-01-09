@@ -5,7 +5,7 @@
 \title{R code for phylo to Chaophyabu function, speed up performance}
 \usage{
 phyBranchAL_Abu(phylo, data, datatype = "abundance", refT = 0,
-  rootExtend = T, removeAbu0 = T)
+  rootExtend = T, remove0 = T)
 }
 \arguments{
 \item{phylo}{a phylo object}

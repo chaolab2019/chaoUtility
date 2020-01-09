@@ -43,9 +43,9 @@ phylogeny fucntions:
 
 -[`phylengthbyT()`](#phylengthbyt) : input vector of ageT, chaophytree object, return matrix with label and new branch.length (default `rootExtend =T` ,if `rootExtend=T and ageT>treeH `, root.length=ageT-treeH), [non ultrametric tree example](#examples-non-ultrametric-tree-by-reference-t)
 
--[`phyBranchAL()`](#phybranchal) : input abundance data,phylo object,vector of ageTs,  return Chaophyabu object  (default `rootExtend =T` ,`removeAbu0=T`)
+-[`phyBranchAL()`](#phybranchal) : input abundance data,phylo object,vector of ageTs,  return Chaophyabu object  (default `rootExtend =T` ,`remove0=T`)
 
-
+-[`phyBranchALinc()`](#phybranchalinc) : input incidence_raw data,phylo object,vector of ageTs,  return Chaophyabu object  (default `rootExtend =T` ,`remove0=T`)
 
 -`phylo2chaolabphy()`
 
@@ -384,20 +384,61 @@ as.data.frame(phytree$phytree)
  
 ```
 
+## #phybranchalinc
+
+
+### EXAMPLES-improve performance
+
+```{r }
+  data(phybird.new)
+  bird.abu <- phybird.new$abun   
+  bird.inc <- phybird.new$inci   
+  bird.lab <- rownames(phybird.new$abun)   
+  bird.phy <- phybird.new$chaophytree   
+  tree<-as.phylo(bird.phy$phytree)   
+  Idata<-bird.inc$North.site   
+  
+  Idata
+
+  refTs<-c(80,90,100)   
+  result<-phyBranchAL_Inc(tree,Idata,datatype="incidence_raw",refTs)   
+
+ ##final branch.abu:removed abu=0
+ treeNabu<-result$treeNabu
+ treeNabu %>% print(n = Inf)
+ 
+ ##final treeH:removed abu=0
+ result$treeH
+ 
+ ##final branch.length:removed abu=0
+ result$BLbyT
+ 
+ ####result$treeNabu is an object of tbl_tree could change to phylo
+ tlb2phylo<-as.phylo(treeNabu)
+ plot(tlb2phylo)
+ 
+ 
+ ###this is the original tree
+ plot(tree)
+ 
+```
+
 
 
 ### EXAMPLES
 
 ```{r }
- data(AbuALdata)
- adata<-AbuALdata$abudata
- atree<-AbuALdata$tree
- vdata<-adata$EM
- names(vdata)<-rownames(adata)
- vdata
- 
- refTs<-c(400,250,100)
- result<-phy_BranchAL_Abu(atree,vdata,datatype="abundance",refTs)
+  data(phybird.new)
+  bird.abu <- phybird.new$abun   
+  bird.inc <- phybird.new$inci   
+  bird.lab <- rownames(phybird.new$abun)   
+  bird.phy <- phybird.new$chaophytree   
+  tree<-as.phylo(bird.phy$phytree)   
+  Idata<-bird.inc$North.site   
+
+  refTs<-c(80,90,100)   
+  result<-phy_BranchAL_Inc(tree,Idata,datatype="incidence_raw",refTs)   
+
  
  ##final branch.abu:removed abu=0
  treeNabu<-result$treeNabu

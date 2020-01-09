@@ -23,7 +23,9 @@ phylogeny fucntions:
 
 -[`phylengthbyT()`](#phylengthbyt) : input vector of ageT, chaophytree object, return matrix with label and new branch.length (default `rootExtend =T` ,if `rootExtend=T and ageT>treeH`, root.length=ageT-treeH), [non ultrametric tree example](#examples-non-ultrametric-tree-by-reference-t)
 
--[`phyBranchAL()`](#phybranchal) : input abundance data,phylo object,vector of ageTs, return Chaophyabu object (default `rootExtend =T` ,`removeAbu0=T`)
+-[`phyBranchAL()`](#phybranchal) : input abundance data,phylo object,vector of ageTs, return Chaophyabu object (default `rootExtend =T` ,`remove0=T`)
+
+-[`phyBranchALinc()`](#phybranchalinc) : input incidence\_raw data,phylo object,vector of ageTs, return Chaophyabu object (default `rootExtend =T` ,`remove0=T`)
 
 -`phylo2chaolabphy()`
 
@@ -107,120 +109,120 @@ data(bird)
 bird.abun<- bird$abun
 Boot_p(bird$abun,zero=FALSE,Bootype="SAR",datatype="abundance",rho=0.8)
 $North.site
- [1] 37  2  1  7  4  3 13  1  2  6 11  2 12 11  2  2 13 14  1  2  7  2 17
-[24]  7  3  4 13  2  1
+ [1] 43  2  2  5  4  4 12  1  2  4 13  2 10  9  1  2 14 11  3  7  2 17  7
+[24]  3  2 17  2  1
 
 $South.site
- [1]  4 18 30  2  2  1  5  2  6 32  5 10  1  5  5  6 10 16  3 12  8  1 14
-[24]  4 16  2  2  8  7  2  4 18 14  2  6  3  2 17  2
+ [1]  3 17 30  3  2  2  6  7 34  6 12  1  4  6  6  7 14  5 10  8  2 15  1
+[24] 19  1  3  9  8  2  4 15 15  2  4  5  2 15  2
 
 data(incdata)
 Boot_p(incdata,zero=FALSE,Bootype="SAR",datatype="incidence",rho=0.8)
 $Monsoon
 plots                                                                   
-  191    10     9     4    31     1    64     1     1     8     9     3 
+  191     7     8     3    31     2    70     2     2     4    11     2 
                                                                         
-    1     2     2    46     7     3     1    52     4     8    16    61 
+    3     1     4    52     8     2     3    46     2     7    12    64 
                                                                         
-  129    22     0    15     3     2     8     2     1   101     2     1 
+  135    21     2    19     4     1     8     2     2    98     1     2 
                                                                         
-    3     2     7     2    26     1     3    30     7     2    14     4 
+    2     1     6     1    25     2     2    36     7     4    13     5 
                                                                         
-    1     5    44     7    84    36     3     2     3     6     5     4 
+    2     3    47     6    82    33     5     2     3     4     5     7 
                                                                         
-    4    19     7    16    26     2     2    37     4    29     1    40 
+    5    20     5    17    29     2     2    34     5    23     1    37 
                                                                         
-    4     3    72     7     2    31    35    21    15    33    67     2 
+    4     3    74     8     2    33    38    21    13    30    71     2 
                                                                         
-    2    47     4     2     3    12     1   119    10    66    33   146 
+    2    48     7     1     2    11     1   117    11    66    28   143 
                                                                         
-    2     1     0     2     2     6    12   107    71     2    78    20 
+    1     2     2     2     3     6    13   109    71     3    82    17 
                                                                         
-    6     6     3     4    17    52    33     7     5     8    95    18 
+    6     7     3     2    15    53    38     5     6     7    96    18 
                                                                         
-    8     4   108    54    58     2     2     4     1     4     3    13 
+   11     3   106    54    54     2     1     6     2     4     1    15 
                                                                         
-    2     9     2     1    33    64     5    46     6     4    31     2 
+    1     9     2     1    31    60     4    49     3     5    38     2 
                                                                         
-   12    93     3    79    23    45     2     2    74    91    13     2 
+   17    94     2    76    24    42     1     1    73    91    16     5 
                                                                         
-    2    42     5    11    16     1     8     1    11    49    91     3 
+    2    41     5     7    16     3     8     3    10    52    96     7 
                                                                         
-   28     2    19    14   103     2     2     4    19    47    40    13 
+   23     1    25    10    98     2     2     6    20    40    37    12 
                                                                         
-   17     7    31     5     3     4   116     2     8     4    16    32 
+   18     5    29     5     1     4   112     3     8     3    16    33 
                                                                         
-    2     4    20    46   186    59     5     1    39    64     2    43 
+    2     3    22    52   185    60     6     2    39    66     2    40 
                                                                         
-   50     2     2    24     2     6     7    27    67   118     2     2 
+   43     3     1    23     2     4     4    29    65   114     2     2 
                                                                         
-    3     2    12     3     1     4    40   108     4     7    25     9 
+    3     2    13     3     2     3    37   107     4    10    24     8 
                                                                         
-   10     3     3    40     2     6    53     5    14     9    51     8 
+   10     2     3    43     2     7    51     5    14     6    47    10 
                                                                         
-   15     6     2     6     1     4     2     2     1     2    20    17 
+   14     6     1     5     2     2     2     1     2     2    15    18 
                                                                         
-   21     7    10     2   140    97    73     2    79     2     2     3 
+   22     9    11     2   139    98    69     3    75     2     2     2 
                                                                         
-   36     2    11     2    12     1     0     4     3    10    33   157 
+   34     1    12     2    12     2     2     4     2    11    31   162 
                                                                         
-    4     2     2    21     2    32     2     2     2     0    45    35 
+    5     1     1    18     2    34     2     2     1     2    48    33 
                                                                         
-    1     1     8    37     6     1     3     4    49     1    35    16 
+    2     1     8    44     5     2     2     2    46     3    35    18 
                                                                         
-    6     0     5     4     2     3    46    17    58    17     3    15 
+    7     2     4     4     1     0    45    21    61    14     3    11 
                                                                         
-    9     2    65    16    62    13     4     2     1     6     2    11 
+    8     2    66    19    61    15     4     2     3     7     2     8 
                                                                         
-   44     1    26     2   106     1     2     2     1     2     2     2 
+   44     2    25     2   108     2     2     1     2     1     2     1 
                                                             
-    1     2     2     1     2     1     2     2     2     2 
+    2     2     2     2     2     2     2     2     2     2 
 
 $Upper.cloud
 plots                                                                   
-  153     1     3     1     9    24    13     7    14    36    15     2 
+  153     1     2     0     6    22    14     6    13    35    16     1 
                                                                         
-    1     2     2    35     2     1     6     9    33     3     4    33 
+    3     2     1    35     2     1     6     8    29     3     3    34 
                                                                         
-    2     5    59    54     2     2     8     1    40     2     4    50 
+    2     8    55    49     2     1     9     2    40     3     4    56 
                                                                         
-    8     2     9    40    51    79    59     1     7    41     1    63 
+    7     2     9    36    53    81    59     2     8    44     2    71 
                                                                         
-    1     2     1     3    47     3     5     3     2     3     3    32 
+    1     2     2     4    45     3     5     2     1     3     2    31 
                                                                         
-   59    56    88    17     8    31     9     4    10     1     2     0 
+   57    45    86    19     8    32    11     5    10     0     2     2 
                                                                         
-    1     7     3     6    63    36    11     5     2     4     2    20 
+    2     6     1     3    61    34    10     5     3     4     2    18 
                                                                         
-    4    66     2     2    44    18     1     2     2     2    11     2 
+    4    62     1     0    41    18     2     3     1     2    11     1 
                                                                         
-    4     5     1     2    29     2     6    38     1    16     2    25 
+    4     4     2     2    30     1     9    43     1    14     0    25 
                                                                         
-   15    24     2    11     2     3     2    20    40    65     3     3 
+   11    24     2    13     2     2     2    24    37    68     3     3 
                                                                         
-    5    13   142     2     2     3    11    11     2     2     2     1 
+    5    16   141     1     2     3    11    11     2     3     2     1 
                                                                         
-   16    12     7    24     2     2     3     2    26     1     2     3 
+   18    11     7    18     2     2     2     2    30     1     3     4 
                                                                         
-    7    18     2    15     1    12     2    11     3     3     4    13 
+    8    17     2    12     2    13     2     8     3     4     4    15 
                                                                         
-    3    50     1    10     5     2     6     6     8     5     4     2 
+    4    47     2     8     4     0     4     5     5     4     4     2 
                                                                         
-    2     3     3     2    41    81     2     2     4     5     9     1 
+    2     5     4     2    45    88     2     2     2     8     8     1 
                                                                         
-    1     4    19    16     2     2     5     7    40     3     6     2 
+    1     3    23    14     2     2     4     6    35     3     5     2 
                                                                         
-    4     2     1    37    50     9     5    15     5    44    53     1 
+    3     2     2    40    48     7     4    15     4    45    60     2 
                                                                         
-   96     6     3     6    38    22     3    11     7    69     3     2 
+   95     7     4     4    35    24     2    13     8    70     3     2 
                                                                         
-  107    88     2    10     4     4    10     2    13     6     0     5 
+  105    86     1     7     4     4     8     2     9     6     1     3 
                                                                         
-   24     2     9     6     2     1     2     2    22     7    23     1 
+   27     3     8     6     3     2     1     2    25     6    23     2 
                                                                         
-    2     2     0     2     0     2     2     2     1     1     1     2 
+    2     2     2     2     1     2     1     2     2     2     2     2 
       
-    1 
+    2 
 ```
 
 with replacement:One
@@ -935,42 +937,41 @@ as.data.frame(phytree$phytree)
  ##final branch.abu:removed abu=0
  treeNabu<-result$treeNabu
  treeNabu %>% print(n = Inf)
-# A tibble: 32 x 8
-   parent  node branch.length tgroup label node.age branch.height
-    <int> <int>         <dbl> <chr>  <chr>    <dbl>         <dbl>
- 1     21     1          97.5 Tip    Elym~      0            97.5
- 2     21     2          97.5 Tip    Cuta~      0            97.5
- 3     21     3          97.5 Tip    Spor~      0            97.5
- 4     20     4         146.  Tip    Cype~      0           146. 
- 5     19     5         195   Tip    Panc~      0           195  
- 6     23     6         195   Tip    Caki~      0           195  
- 7     24     7         162.  Tip    Cham~      0           162. 
- 8     25     8          65   Tip    Medi~      0            65  
- 9     25     9          65   Tip    Onon~      0            65  
-10     28    10          97.5 Tip    Caly~      0            97.5
-11     28    11          97.5 Tip    Plan~      0            97.5
-12     30    12          43.3 Tip    Echi~      0            43.3
-13     30    13          43.3 Tip    Eryn~      0            43.3
-14     31    14          97.5 Tip    Anth~      0            97.5
-15     31    15          97.5 Tip    Otan~      0            97.5
-16     32    16         130   Tip    Poly~      0           130  
-17     32    17         130   Tip    Sals~      0           130  
-18     18    18          NA   Root   poal~    292.          292. 
-19     18    19          97.5 Inode  I1       195           292. 
-20     19    20          48.8 Inode  I2       146.          195  
-21     20    21          48.8 Inode  poac~     97.5         146. 
-22     18    22          65   Inode  I4       228.          292. 
-23     22    23          32.5 Inode  I5       195           228. 
-24     23    24          32.5 Inode  I6       162.          195  
-25     24    25          97.5 Inode  I7        65           162. 
-26     22    26          32.5 Inode  I8       195           228. 
-27     26    27          32.5 Inode  I9       162.          195  
-28     27    28          65   Inode  I10       97.5         162. 
-29     27    29          32.5 Inode  I11      130           162. 
-30     29    30          86.7 Inode  apia~     43.3         130  
-31     29    31          32.5 Inode  aste~     97.5         130  
-32     26    32          65   Inode  cary~    130           195  
-# ... with 1 more variable: branch.abun <int>
+# A tibble: 32 x 6
+   parent  node branch.length tgroup label                 branch.abun
+    <int> <int>         <dbl> <chr>  <chr>                       <int>
+ 1     21     1          97.5 Tip    Elymus_farctus                 60
+ 2     21     2          97.5 Tip    Cutandia_maritima               3
+ 3     21     3          97.5 Tip    Sporobolus_virginicus          42
+ 4     20     4         146.  Tip    Cyperus_kalli                   1
+ 5     19     5         195   Tip    Pancratium_maritimum            6
+ 6     23     6         195   Tip    Cakile_maritima                81
+ 7     24     7         162.  Tip    Chamaesyce_peplis              36
+ 8     25     8          65   Tip    Medicago_marina                 1
+ 9     25     9          65   Tip    Ononis_variegata                2
+10     28    10          97.5 Tip    Calystegia_soldanella          10
+11     28    11          97.5 Tip    Plantago_coronopus              1
+12     30    12          43.3 Tip    Echinophora_spinosa            11
+13     30    13          43.3 Tip    Eryngium_maritimum              8
+14     31    14          97.5 Tip    Anthemis_maritima               9
+15     31    15          97.5 Tip    Otanthus_maritimus             16
+16     32    16         130   Tip    Polygonum_maritimum            14
+17     32    17         130   Tip    Salsola_kali                   72
+18     18    18           0   Root   poales_to_asterales           373
+19     18    19          97.5 Inode  I1                            112
+20     19    20          48.8 Inode  I2                            106
+21     20    21          48.8 Inode  poaceae                       105
+22     18    22          65   Inode  I4                            261
+23     22    23          32.5 Inode  I5                            120
+24     23    24          32.5 Inode  I6                             39
+25     24    25          97.5 Inode  I7                              3
+26     22    26          32.5 Inode  I8                            141
+27     26    27          32.5 Inode  I9                             55
+28     27    28          65   Inode  I10                            11
+29     27    29          32.5 Inode  I11                            44
+30     29    30          86.7 Inode  apiaceae                       19
+31     29    31          32.5 Inode  asteraceae                     25
+32     26    32          65   Inode  caryophyllales                 86
  
  ##final treeH:removed abu=0
  result$treeH
@@ -1028,167 +1029,229 @@ caryophyllales         65.00000  65.00000   0.00000
 
 <img src="README_files/figure-markdown_github/unnamed-chunk-18-2.png" width="672" style="display: block; margin: auto;" />
 
-### EXAMPLES
+\#phybranchalinc
+----------------
+
+### EXAMPLES-improve performance
 
 ``` r
- data(AbuALdata)
- adata<-AbuALdata$abudata
- atree<-AbuALdata$tree
- vdata<-adata$EM
- names(vdata)<-rownames(adata)
- vdata
-     Juniperus_oxycedrus        Clematis_flammula         Silene_canescens 
-                       0                        0                        0 
-            Salsola_kali      Polygonum_maritimum   Phillyrea_angustifolia 
-                      72                       14                        0 
-    Helichrysum_stoechas       Otanthus_maritimus Centaurea_sphaerocephala 
-                       0                       16                        0 
-        Sonchus_bulbosus        Anthemis_maritima    Pycnocomon_rutifolium 
-                       0                        9                        0 
-        Lonicera_implexa       Eryngium_maritimum      Echinophora_spinosa 
-                       0                        8                       11 
-      Pseudorlaya_pumila          Rubia_peregrina     Crucianella_maritima 
-                       0                        0                        0 
-           Prasium_majus          Teucrium_flavum       Plantago_coronopus 
-                       0                        0                        1 
-   Calystegia_soldanella         Lotus_cytisoides         Ononis_variegata 
-                      10                        0                        2 
-     Medicago_littoralis          Medicago_marina        Rhamnus_alaternus 
-                       0                        1                        0 
-            Quercus_ilex      Euphorbia_terracina        Chamaesyce_peplis 
-                       0                        0                       36 
-      Pistacia_lentiscus           Daphne_gnidium           Cistus_incanus 
-                       0                        0                        0 
-         Cakile_maritima            Smilax_aspera     Pancratium_maritimum 
-                      81                        0                        6 
-   Asparagus_acutifolius            Cyperus_kalli      Lophocloa_pubescens 
-                       0                        1                        0 
-          Lagurus_ovatus    Sporobolus_virginicus          Bromus_diandrus 
-                       0                       42                        0 
-       Cutandia_maritima       Ammophila_arenaria       Vulpia_fasciculata 
-                       3                        0                        0 
-          Elymus_farctus 
-                      60 
- 
- refTs<-c(400,250,100)
- result<-phy_BranchAL_Abu(atree,vdata,datatype="abundance",refTs)
- 
+  data(phybird.new)
+  bird.abu <- phybird.new$abun   
+  bird.inc <- phybird.new$inci   
+  bird.lab <- rownames(phybird.new$abun)   
+  bird.phy <- phybird.new$chaophytree   
+  tree<-as.phylo(bird.phy$phytree)   
+  Idata<-bird.inc$North.site   
+  
+  Idata
+                             F1O F2A F3A F3O F4A F4O F5A F5B F6A F6B F7A
+Acanthiza_lineata              0   0   0   0   0   0   0   0   0   0   0
+Acanthiza_nana                 0   0   0   0   0   0   0   0   0   0   0
+Acanthiza_pusilla              1   1   1   1   1   1   1   1   1   1   1
+Acanthorhynchus_tenuirostris   0   0   0   0   0   0   0   0   0   0   0
+Alisterus_scapularis           0   0   1   0   0   0   0   0   1   0   0
+Cacatua_galerita               0   0   0   0   0   0   1   0   0   0   0
+Cacomantis_flabelliformis      0   1   0   0   1   0   1   1   1   0   0
+Calyptorhynchus_funereus       0   0   0   0   0   0   0   0   0   1   0
+Colluricincla_harmonica        1   1   0   0   0   0   0   0   0   0   0
+Cormobates_leucophaea          1   1   1   1   1   1   1   1   0   1   0
+Corvus_coronoides              0   0   0   0   0   0   0   1   0   0   0
+Dacelo_novaeguineae            0   0   0   0   0   0   0   0   0   0   1
+Eopsaltria_australis           1   0   0   1   0   1   1   0   1   0   0
+Gerygone_mouki                 1   1   1   1   0   1   0   0   0   0   0
+Leucosarcia_melanoleuca        0   1   0   0   0   0   0   0   0   0   0
+Lichenostomus_chrysops         0   0   0   0   0   0   0   0   0   0   0
+Malurus_cyaneus                0   0   0   0   0   0   0   0   0   0   0
+Malurus_lamberti               0   0   0   0   0   0   0   0   0   0   0
+Manorina_melanophrys           0   0   0   0   0   0   0   0   0   0   0
+Meliphaga_lewinii              1   1   1   1   1   1   0   0   0   0   0
+Menura_novaehollandiae         1   1   1   0   0   0   0   0   1   0   0
+Monarcha_melanopsis            0   0   0   0   1   0   0   0   0   0   0
+Neochmia_temporalis            0   0   0   0   0   0   0   0   0   0   0
+Oriolus_sagittatus             0   0   1   0   0   0   0   0   0   0   0
+Pachycephala_olivacea          0   0   0   0   0   0   0   0   0   0   0
+Pachycephala_pectoralis        1   1   1   1   0   1   0   0   0   0   1
+Pachycephala_rufiventris       0   0   0   0   0   0   0   0   0   0   0
+Pardalotus_punctatus           1   0   1   1   1   0   1   1   0   0   1
+Petroica_rosea                 0   0   0   0   0   0   0   0   0   0   1
+Phylidonyris_niger             0   0   0   0   0   0   0   0   0   0   0
+Platycercus_elegans            0   0   1   0   0   0   0   0   0   0   0
+Psophodes_olivaceus            0   0   1   1   0   0   0   1   0   0   0
+Ptilonorhynchus_violaceus      0   0   0   0   1   0   0   0   0   0   0
+Ptiloris_paradiseus            0   0   0   0   0   0   0   0   0   0   0
+Rhipidura_albicollis           1   1   0   1   0   1   1   1   1   1   1
+Rhipidura_rufifrons            0   0   1   0   1   0   0   0   0   1   0
+Sericornis_citreogularis       0   0   0   0   0   0   0   0   0   0   0
+Sericornis_frontalis           1   0   0   1   0   0   0   0   0   0   0
+Strepera_graculina             0   0   1   0   0   0   0   0   0   1   0
+Zoothera_lunulata              0   0   0   0   0   0   0   0   0   0   0
+Zosterops_lateralis            1   1   0   0   1   1   1   0   0   0   0
+                             F7Q
+Acanthiza_lineata              0
+Acanthiza_nana                 0
+Acanthiza_pusilla              1
+Acanthorhynchus_tenuirostris   0
+Alisterus_scapularis           0
+Cacatua_galerita               0
+Cacomantis_flabelliformis      0
+Calyptorhynchus_funereus       0
+Colluricincla_harmonica        0
+Cormobates_leucophaea          0
+Corvus_coronoides              0
+Dacelo_novaeguineae            0
+Eopsaltria_australis           0
+Gerygone_mouki                 0
+Leucosarcia_melanoleuca        0
+Lichenostomus_chrysops         0
+Malurus_cyaneus                0
+Malurus_lamberti               0
+Manorina_melanophrys           0
+Meliphaga_lewinii              0
+Menura_novaehollandiae         1
+Monarcha_melanopsis            0
+Neochmia_temporalis            0
+Oriolus_sagittatus             0
+Pachycephala_olivacea          0
+Pachycephala_pectoralis        1
+Pachycephala_rufiventris       0
+Pardalotus_punctatus           0
+Petroica_rosea                 0
+Phylidonyris_niger             0
+Platycercus_elegans            0
+Psophodes_olivaceus            0
+Ptilonorhynchus_violaceus      1
+Ptiloris_paradiseus            0
+Rhipidura_albicollis           1
+Rhipidura_rufifrons            0
+Sericornis_citreogularis       0
+Sericornis_frontalis           0
+Strepera_graculina             1
+Zoothera_lunulata              0
+Zosterops_lateralis            0
+
+  refTs<-c(80,90,100)   
+  result<-phyBranchAL_Inc(tree,Idata,datatype="incidence_raw",refTs)   
+
  ##final branch.abu:removed abu=0
  treeNabu<-result$treeNabu
  treeNabu %>% print(n = Inf)
-# A tibble: 32 x 7
-   parent  node branch.length label             tgroup node.age branch.abun
-    <int> <int>         <dbl> <chr>             <chr>     <dbl>       <int>
- 1     21     1          97.5 Elymus_farctus    Tip         0            60
- 2     21     2          97.5 Cutandia_maritima Tip         0             3
- 3     21     3          97.5 Sporobolus_virgi~ Tip         0            42
- 4     20     4         146.  Cyperus_kalli     Tip         0             1
- 5     19     5         195   Pancratium_marit~ Tip         0             6
- 6     23     6         195   Cakile_maritima   Tip         0            81
- 7     24     7         162.  Chamaesyce_peplis Tip         0            36
- 8     25     8          65   Medicago_marina   Tip         0             1
- 9     25     9          65   Ononis_variegata  Tip         0             2
-10     28    10          97.5 Calystegia_solda~ Tip         0            10
-11     28    11          97.5 Plantago_coronop~ Tip         0             1
-12     30    12          43.3 Echinophora_spin~ Tip         0            11
-13     30    13          43.3 Eryngium_maritim~ Tip         0             8
-14     31    14          97.5 Anthemis_maritima Tip         0             9
-15     31    15          97.5 Otanthus_maritim~ Tip         0            16
-16     32    16         130   Polygonum_mariti~ Tip         0            14
-17     32    17         130   Salsola_kali      Tip         0            72
-18     18    18           0   poales_to_astera~ Root      292.          373
-19     18    19          97.5 I1                Inode     195           112
-20     19    20          48.8 I2                Inode     146.          106
-21     20    21          48.8 poaceae           Inode      97.5         105
-22     18    22          65   I4                Inode     228.          261
-23     22    23          32.5 I5                Inode     195           120
-24     23    24          32.5 I6                Inode     162.           39
-25     24    25          97.5 I7                Inode      65             3
-26     22    26          32.5 I8                Inode     195           141
-27     26    27          32.5 I9                Inode     162.           55
-28     27    28          65   I10               Inode      97.5          11
-29     27    29          32.5 I11               Inode     130            44
-30     29    30          86.7 apiaceae          Inode      43.3          19
-31     29    31          32.5 asteraceae        Inode      97.5          25
-32     26    32          65   caryophyllales    Inode     130            86
+# A tibble: 53 x 6
+   parent  node branch.length tgroup label                     branch.abun
+    <int> <int>         <dbl> <chr>  <chr>                           <dbl>
+ 1     32     1         32.0  Tip    Alisterus_scapularis                2
+ 2     32     2         32.0  Tip    Platycercus_elegans                 1
+ 3     33     3         32.1  Tip    Cacatua_galerita                    1
+ 4     33     4         32.1  Tip    Calyptorhynchus_funereus            1
+ 5     34     5         60.6  Tip    Menura_novaehollandiae              5
+ 6     36     6         49.8  Tip    Ptilonorhynchus_violaceus           2
+ 7     36     7         49.8  Tip    Cormobates_leucophaea               9
+ 8     39     8         37.0  Tip    Pardalotus_punctatus                7
+ 9     39     9         37.0  Tip    Meliphaga_lewinii                   6
+10     41    10         21.2  Tip    Sericornis_frontalis                2
+11     41    11         21.2  Tip    Acanthiza_pusilla                  12
+12     40    12         23.1  Tip    Gerygone_mouki                      5
+13     44    13         36.8  Tip    Psophodes_olivaceus                 3
+14     44    14         36.8  Tip    Strepera_graculina                  3
+15     46    15         24.5  Tip    Colluricincla_harmonica             2
+16     46    16         24.5  Tip    Pachycephala_pectoralis             7
+17     47    17         30.6  Tip    Oriolus_sagittatus                  1
+18     49    18         26.6  Tip    Monarcha_melanopsis                 1
+19     50    19         15.4  Tip    Rhipidura_rufifrons                 3
+20     50    20         15.4  Tip    Rhipidura_albicollis               10
+21     48    21         27.8  Tip    Corvus_coronoides                   1
+22     52    22         38.0  Tip    Eopsaltria_australis                5
+23     52    23         38.0  Tip    Petroica_rosea                      1
+24     51    24         47.0  Tip    Zosterops_lateralis                 5
+25     29    25         80.6  Tip    Dacelo_novaeguineae                 1
+26     53    26         76.7  Tip    Leucosarcia_melanoleuca             1
+27     53    27         76.7  Tip    Cacomantis_flabelliformis           5
+28     28    28          0    Root   Root                               12
+29     28    29          2.29 Inode  I1                                 12
+30     29    30          3.38 Inode  I2                                 12
+31     30    31         32.2  Inode  I3                                  4
+32     31    32         13.0  Inode  I4                                  2
+33     31    33         12.9  Inode  I5                                  2
+34     30    34         16.6  Inode  I6                                 12
+35     34    35          3.64 Inode  I7                                 12
+36     35    36          7.14 Inode  I8                                 10
+37     35    37          3.56 Inode  I9                                 12
+38     37    38         15.4  Inode  I12                                12
+39     38    39          1.07 Inode  I13                                 9
+40     38    40         15.0  Inode  I18                                12
+41     40    41          1.88 Inode  I19                                12
+42     37    42          3.07 Inode  I23                                12
+43     42    43         11.2  Inode  I24                                12
+44     43    44          2.31 Inode  I25                                 5
+45     43    45          2.73 Inode  I26                                12
+46     45    46         11.9  Inode  I27                                 7
+47     45    47          5.85 Inode  I30                                12
+48     47    48          2.73 Inode  I31                                12
+49     48    49          1.24 Inode  I32                                12
+50     49    50         11.1  Inode  I34                                12
+51     42    51          3.33 Inode  I35                                 8
+52     51    52          9.06 Inode  I36                                 6
+53     28    53          6.12 Inode  I39                                 5
  
  ##final treeH:removed abu=0
  result$treeH
-[1] 292.5
+[1] 82.8575
  
  ##final branch.length:removed abu=0
  result$BLbyT
-$T400
-       Elymus_farctus     Cutandia_maritima Sporobolus_virginicus 
-             97.50000              97.50000              97.50000 
-        Cyperus_kalli  Pancratium_maritimum       Cakile_maritima 
-            146.25000             195.00000             195.00000 
-    Chamaesyce_peplis       Medicago_marina      Ononis_variegata 
-            162.50000              65.00000              65.00000 
-Calystegia_soldanella    Plantago_coronopus   Echinophora_spinosa 
-             97.50000              97.50000              43.33333 
-   Eryngium_maritimum     Anthemis_maritima    Otanthus_maritimus 
-             43.33333              97.50000              97.50000 
-  Polygonum_maritimum          Salsola_kali   poales_to_asterales 
-            130.00000             130.00000             107.50000 
-                   I1                    I2               poaceae 
-             97.50000              48.75000              48.75000 
-                   I4                    I5                    I6 
-             65.00000              32.50000              32.50000 
-                   I7                    I8                    I9 
-             97.50000              32.50000              32.50000 
-                  I10                   I11              apiaceae 
-             65.00000              32.50000              86.66667 
-           asteraceae        caryophyllales 
-             32.50000              65.00000 
-
-$T250
-       Elymus_farctus     Cutandia_maritima Sporobolus_virginicus 
-             97.50000              97.50000              97.50000 
-        Cyperus_kalli  Pancratium_maritimum       Cakile_maritima 
-            146.25000             195.00000             195.00000 
-    Chamaesyce_peplis       Medicago_marina      Ononis_variegata 
-            162.50000              65.00000              65.00000 
-Calystegia_soldanella    Plantago_coronopus   Echinophora_spinosa 
-             97.50000              97.50000              43.33333 
-   Eryngium_maritimum     Anthemis_maritima    Otanthus_maritimus 
-             43.33333              97.50000              97.50000 
-  Polygonum_maritimum          Salsola_kali   poales_to_asterales 
-            130.00000             130.00000               0.00000 
-                   I1                    I2               poaceae 
-             55.00000              48.75000              48.75000 
-                   I4                    I5                    I6 
-             22.50000              32.50000              32.50000 
-                   I7                    I8                    I9 
-             97.50000              32.50000              32.50000 
-                  I10                   I11              apiaceae 
-             65.00000              32.50000              86.66667 
-           asteraceae        caryophyllales 
-             32.50000              65.00000 
-
-$T100
-       Elymus_farctus     Cutandia_maritima Sporobolus_virginicus 
-             97.50000              97.50000              97.50000 
-        Cyperus_kalli  Pancratium_maritimum       Cakile_maritima 
-            100.00000             100.00000             100.00000 
-    Chamaesyce_peplis       Medicago_marina      Ononis_variegata 
-            100.00000              65.00000              65.00000 
-Calystegia_soldanella    Plantago_coronopus   Echinophora_spinosa 
-             97.50000              97.50000              43.33333 
-   Eryngium_maritimum     Anthemis_maritima    Otanthus_maritimus 
-             43.33333              97.50000              97.50000 
-  Polygonum_maritimum          Salsola_kali   poales_to_asterales 
-            100.00000             100.00000               0.00000 
-                   I1                    I2               poaceae 
-              0.00000               0.00000               2.50000 
-                   I4                    I5                    I6 
-              0.00000               0.00000               0.00000 
-                   I7                    I8                    I9 
-             35.00000               0.00000               0.00000 
-                  I10                   I11              apiaceae 
-              2.50000               0.00000              56.66667 
-           asteraceae        caryophyllales 
-              2.50000               0.00000 
+                                T80       T90      T100
+Alisterus_scapularis      31.965955 31.965955 31.965955
+Platycercus_elegans       31.965955 31.965955 31.965955
+Cacatua_galerita          32.146690 32.146690 32.146690
+Calyptorhynchus_funereus  32.146690 32.146690 32.146690
+Menura_novaehollandiae    60.624849 60.624849 60.624849
+Ptilonorhynchus_violaceus 49.841361 49.841361 49.841361
+Cormobates_leucophaea     49.841361 49.841361 49.841361
+Pardalotus_punctatus      36.960283 36.960283 36.960283
+Meliphaga_lewinii         36.960283 36.960283 36.960283
+Sericornis_frontalis      21.190316 21.190316 21.190316
+Acanthiza_pusilla         21.190316 21.190316 21.190316
+Gerygone_mouki            23.071505 23.071505 23.071505
+Psophodes_olivaceus       36.823116 36.823116 36.823116
+Strepera_graculina        36.823116 36.823116 36.823116
+Colluricincla_harmonica   24.540393 24.540393 24.540393
+Pachycephala_pectoralis   24.540393 24.540393 24.540393
+Oriolus_sagittatus        30.551307 30.551307 30.551307
+Monarcha_melanopsis       26.578823 26.578823 26.578823
+Rhipidura_rufifrons       15.439051 15.439051 15.439051
+Rhipidura_albicollis      15.439051 15.439051 15.439051
+Corvus_coronoides         27.822569 27.822569 27.822569
+Eopsaltria_australis      37.965538 37.965538 37.965538
+Petroica_rosea            37.965538 37.965538 37.965538
+Zosterops_lateralis       47.022804 47.022804 47.022804
+Dacelo_novaeguineae       80.000000 80.568469 80.568469
+Leucosarcia_melanoleuca   76.736516 76.736516 76.736516
+Cacomantis_flabelliformis 76.736517 76.736517 76.736517
+Root                       0.000000  7.142497 17.142497
+I1                         0.000000  2.289034  2.289034
+I2                         2.809548  3.378017  3.378017
+I3                        32.176306 32.176306 32.176306
+I4                        13.048191 13.048191 13.048191
+I5                        12.867456 12.867456 12.867456
+I6                        16.565604 16.565604 16.565604
+I7                         3.641184  3.641184  3.641184
+I8                         7.142304  7.142304  7.142304
+I9                         3.560400  3.560400  3.560400
+I12                       15.388978 15.388978 15.388978
+I13                        1.074003  1.074003  1.074003
+I18                       14.962781 14.962781 14.962781
+I19                        1.881189  1.881189  1.881189
+I23                        3.072479  3.072479  3.072479
+I24                       11.216652 11.216652 11.216652
+I25                        2.311018  2.311018  2.311018
+I26                        2.731294  2.731294  2.731294
+I27                       11.862447 11.862447 11.862447
+I30                        5.851533  5.851533  5.851533
+I31                        2.728737  2.728737  2.728737
+I32                        1.243746  1.243746  1.243746
+I34                       11.139773 11.139773 11.139773
+I35                        3.327982  3.327982  3.327982
+I36                        9.057266  9.057266  9.057266
+I39                        3.263483  6.120987  6.120987
  
  ####result$treeNabu is an object of tbl_tree could change to phylo
  tlb2phylo<-as.phylo(treeNabu)
@@ -1201,9 +1264,274 @@ Calystegia_soldanella    Plantago_coronopus   Echinophora_spinosa
  
  
  ###this is the original tree
- plot(atree)
+ plot(tree)
 ```
 
 <img src="README_files/figure-markdown_github/unnamed-chunk-19-2.png" width="672" style="display: block; margin: auto;" />
+
+### EXAMPLES
+
+``` r
+  data(phybird.new)
+  bird.abu <- phybird.new$abun   
+  bird.inc <- phybird.new$inci   
+  bird.lab <- rownames(phybird.new$abun)   
+  bird.phy <- phybird.new$chaophytree   
+  tree<-as.phylo(bird.phy$phytree)   
+  Idata<-bird.inc$North.site   
+
+  refTs<-c(80,90,100)   
+  result<-phy_BranchAL_Inc(tree,Idata,datatype="incidence_raw",refTs)   
+
+ 
+ ##final branch.abu:removed abu=0
+ treeNabu<-result$treeNabu
+ treeNabu %>% print(n = Inf)
+# A tibble: 53 x 7
+   parent  node branch.length label             tgroup node.age branch.abun
+    <int> <int>         <dbl> <chr>             <chr>     <dbl>       <dbl>
+ 1     32     1         32.0  Alisterus_scapul~ Tip         0             2
+ 2     32     2         32.0  Platycercus_eleg~ Tip         0             1
+ 3     33     3         32.1  Cacatua_galerita  Tip         0             1
+ 4     33     4         32.1  Calyptorhynchus_~ Tip         0             1
+ 5     34     5         60.6  Menura_novaeholl~ Tip         0             5
+ 6     36     6         49.8  Ptilonorhynchus_~ Tip         0             2
+ 7     36     7         49.8  Cormobates_leuco~ Tip         0             9
+ 8     39     8         37.0  Pardalotus_punct~ Tip         0             7
+ 9     39     9         37.0  Meliphaga_lewinii Tip         0             6
+10     41    10         21.2  Sericornis_front~ Tip         0             2
+11     41    11         21.2  Acanthiza_pusilla Tip         0            12
+12     40    12         23.1  Gerygone_mouki    Tip         0             5
+13     44    13         36.8  Psophodes_olivac~ Tip         0             3
+14     44    14         36.8  Strepera_graculi~ Tip         0             3
+15     46    15         24.5  Colluricincla_ha~ Tip         0             2
+16     46    16         24.5  Pachycephala_pec~ Tip         0             7
+17     47    17         30.6  Oriolus_sagittat~ Tip         0             1
+18     49    18         26.6  Monarcha_melanop~ Tip         0             1
+19     50    19         15.4  Rhipidura_rufifr~ Tip         0             3
+20     50    20         15.4  Rhipidura_albico~ Tip         0            10
+21     48    21         27.8  Corvus_coronoides Tip         0             1
+22     52    22         38.0  Eopsaltria_austr~ Tip         0             5
+23     52    23         38.0  Petroica_rosea    Tip         0             1
+24     51    24         47.0  Zosterops_latera~ Tip         0             5
+25     29    25         80.6  Dacelo_novaeguin~ Tip         0             1
+26     53    26         76.7  Leucosarcia_mela~ Tip         0             1
+27     53    27         76.7  Cacomantis_flabe~ Tip         0             5
+28     28    28          0    Root              Root       82.9          12
+29     28    29          2.29 I1                Inode      80.6          12
+30     29    30          3.38 I2                Inode      77.2          12
+31     30    31         32.2  I3                Inode      45.0           4
+32     31    32         13.0  I4                Inode      32.0           2
+33     31    33         12.9  I5                Inode      32.1           2
+34     30    34         16.6  I6                Inode      60.6          12
+35     34    35          3.64 I7                Inode      57.0          12
+36     35    36          7.14 I8                Inode      49.8          10
+37     35    37          3.56 I9                Inode      53.4          12
+38     37    38         15.4  I12               Inode      38.0          12
+39     38    39          1.07 I13               Inode      37.0           9
+40     38    40         15.0  I18               Inode      23.1          12
+41     40    41          1.88 I19               Inode      21.2          12
+42     37    42          3.07 I23               Inode      50.4          12
+43     42    43         11.2  I24               Inode      39.1          12
+44     43    44          2.31 I25               Inode      36.8           5
+45     43    45          2.73 I26               Inode      36.4          12
+46     45    46         11.9  I27               Inode      24.5           7
+47     45    47          5.85 I30               Inode      30.6          12
+48     47    48          2.73 I31               Inode      27.8          12
+49     48    49          1.24 I32               Inode      26.6          12
+50     49    50         11.1  I34               Inode      15.4          12
+51     42    51          3.33 I35               Inode      47.0           8
+52     51    52          9.06 I36               Inode      38.0           6
+53     28    53          6.12 I39               Inode      76.7           5
+ 
+ ##final treeH:removed abu=0
+ result$treeH
+[1] 82.8575
+ 
+ ##final branch.length:removed abu=0
+ result$BLbyT
+$T80
+     Alisterus_scapularis       Platycercus_elegans 
+                31.965955                 31.965955 
+         Cacatua_galerita  Calyptorhynchus_funereus 
+                32.146690                 32.146690 
+   Menura_novaehollandiae Ptilonorhynchus_violaceus 
+                60.624849                 49.841361 
+    Cormobates_leucophaea      Pardalotus_punctatus 
+                49.841361                 36.960283 
+        Meliphaga_lewinii      Sericornis_frontalis 
+                36.960283                 21.190316 
+        Acanthiza_pusilla            Gerygone_mouki 
+                21.190316                 23.071505 
+      Psophodes_olivaceus        Strepera_graculina 
+                36.823116                 36.823116 
+  Colluricincla_harmonica   Pachycephala_pectoralis 
+                24.540393                 24.540393 
+       Oriolus_sagittatus       Monarcha_melanopsis 
+                30.551307                 26.578823 
+      Rhipidura_rufifrons      Rhipidura_albicollis 
+                15.439051                 15.439051 
+        Corvus_coronoides      Eopsaltria_australis 
+                27.822569                 37.965538 
+           Petroica_rosea       Zosterops_lateralis 
+                37.965538                 47.022804 
+      Dacelo_novaeguineae   Leucosarcia_melanoleuca 
+                80.000000                 76.736516 
+Cacomantis_flabelliformis                      Root 
+                76.736517                  0.000000 
+                       I1                        I2 
+                 0.000000                  2.809548 
+                       I3                        I4 
+                32.176306                 13.048191 
+                       I5                        I6 
+                12.867456                 16.565604 
+                       I7                        I8 
+                 3.641184                  7.142304 
+                       I9                       I12 
+                 3.560400                 15.388978 
+                      I13                       I18 
+                 1.074003                 14.962781 
+                      I19                       I23 
+                 1.881189                  3.072479 
+                      I24                       I25 
+                11.216652                  2.311018 
+                      I26                       I27 
+                 2.731294                 11.862447 
+                      I30                       I31 
+                 5.851533                  2.728737 
+                      I32                       I34 
+                 1.243746                 11.139773 
+                      I35                       I36 
+                 3.327982                  9.057266 
+                      I39 
+                 3.263483 
+
+$T90
+     Alisterus_scapularis       Platycercus_elegans 
+                31.965955                 31.965955 
+         Cacatua_galerita  Calyptorhynchus_funereus 
+                32.146690                 32.146690 
+   Menura_novaehollandiae Ptilonorhynchus_violaceus 
+                60.624849                 49.841361 
+    Cormobates_leucophaea      Pardalotus_punctatus 
+                49.841361                 36.960283 
+        Meliphaga_lewinii      Sericornis_frontalis 
+                36.960283                 21.190316 
+        Acanthiza_pusilla            Gerygone_mouki 
+                21.190316                 23.071505 
+      Psophodes_olivaceus        Strepera_graculina 
+                36.823116                 36.823116 
+  Colluricincla_harmonica   Pachycephala_pectoralis 
+                24.540393                 24.540393 
+       Oriolus_sagittatus       Monarcha_melanopsis 
+                30.551307                 26.578823 
+      Rhipidura_rufifrons      Rhipidura_albicollis 
+                15.439051                 15.439051 
+        Corvus_coronoides      Eopsaltria_australis 
+                27.822569                 37.965538 
+           Petroica_rosea       Zosterops_lateralis 
+                37.965538                 47.022804 
+      Dacelo_novaeguineae   Leucosarcia_melanoleuca 
+                80.568469                 76.736516 
+Cacomantis_flabelliformis                      Root 
+                76.736517                  7.142497 
+                       I1                        I2 
+                 2.289034                  3.378017 
+                       I3                        I4 
+                32.176306                 13.048191 
+                       I5                        I6 
+                12.867456                 16.565604 
+                       I7                        I8 
+                 3.641184                  7.142304 
+                       I9                       I12 
+                 3.560400                 15.388978 
+                      I13                       I18 
+                 1.074003                 14.962781 
+                      I19                       I23 
+                 1.881189                  3.072479 
+                      I24                       I25 
+                11.216652                  2.311018 
+                      I26                       I27 
+                 2.731294                 11.862447 
+                      I30                       I31 
+                 5.851533                  2.728737 
+                      I32                       I34 
+                 1.243746                 11.139773 
+                      I35                       I36 
+                 3.327982                  9.057266 
+                      I39 
+                 6.120987 
+
+$T100
+     Alisterus_scapularis       Platycercus_elegans 
+                31.965955                 31.965955 
+         Cacatua_galerita  Calyptorhynchus_funereus 
+                32.146690                 32.146690 
+   Menura_novaehollandiae Ptilonorhynchus_violaceus 
+                60.624849                 49.841361 
+    Cormobates_leucophaea      Pardalotus_punctatus 
+                49.841361                 36.960283 
+        Meliphaga_lewinii      Sericornis_frontalis 
+                36.960283                 21.190316 
+        Acanthiza_pusilla            Gerygone_mouki 
+                21.190316                 23.071505 
+      Psophodes_olivaceus        Strepera_graculina 
+                36.823116                 36.823116 
+  Colluricincla_harmonica   Pachycephala_pectoralis 
+                24.540393                 24.540393 
+       Oriolus_sagittatus       Monarcha_melanopsis 
+                30.551307                 26.578823 
+      Rhipidura_rufifrons      Rhipidura_albicollis 
+                15.439051                 15.439051 
+        Corvus_coronoides      Eopsaltria_australis 
+                27.822569                 37.965538 
+           Petroica_rosea       Zosterops_lateralis 
+                37.965538                 47.022804 
+      Dacelo_novaeguineae   Leucosarcia_melanoleuca 
+                80.568469                 76.736516 
+Cacomantis_flabelliformis                      Root 
+                76.736517                 17.142497 
+                       I1                        I2 
+                 2.289034                  3.378017 
+                       I3                        I4 
+                32.176306                 13.048191 
+                       I5                        I6 
+                12.867456                 16.565604 
+                       I7                        I8 
+                 3.641184                  7.142304 
+                       I9                       I12 
+                 3.560400                 15.388978 
+                      I13                       I18 
+                 1.074003                 14.962781 
+                      I19                       I23 
+                 1.881189                  3.072479 
+                      I24                       I25 
+                11.216652                  2.311018 
+                      I26                       I27 
+                 2.731294                 11.862447 
+                      I30                       I31 
+                 5.851533                  2.728737 
+                      I32                       I34 
+                 1.243746                 11.139773 
+                      I35                       I36 
+                 3.327982                  9.057266 
+                      I39 
+                 6.120987 
+ 
+ ####result$treeNabu is an object of tbl_tree could change to phylo
+ tlb2phylo<-as.phylo(treeNabu)
+ plot(tlb2phylo)
+```
+
+<img src="README_files/figure-markdown_github/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" />
+
+``` r
+ 
+ 
+ ###this is the original tree
+ plot(atree)
+```
+
+<img src="README_files/figure-markdown_github/unnamed-chunk-20-2.png" width="672" style="display: block; margin: auto;" />
 
 [back](#overview)

@@ -24,7 +24,7 @@
 ###should input abundance by vector with names
 
 
-phy_BranchAL_Abu<-function(phylo,data, datatype="abundance",refT=0,rootExtend=T,removeAbu0=T){
+phy_BranchAL_Abu<-function(phylo,data, datatype="abundance",refT=0,rootExtend=T,remove0=T){
   #if(class(phylo) != "phylo")
   if (!inherits(phylo, "phylo"))
     stop("invlid class: only support phylo object")
@@ -33,18 +33,20 @@ phy_BranchAL_Abu<-function(phylo,data, datatype="abundance",refT=0,rootExtend=T,
   if(datatype=="incidence_freq" | datatype=="incidence")
     stop('only support datatype="incidence_raw"')
 
+  labels<-names(data)
+  my_match <- match(labels, phylo$tip.label)
+  if(sum(is.na(my_match)) > 0) stop("Argument labels and tree Tip not matach")
+
   if(datatype=="abundance"){
 
     ###drop Abu=0 tips###
-    if(removeAbu0==T){
+    if(remove0==T){
       dtip = phylo$tip.label[-match(names(data[data>0]), phylo$tip.label)]
       subtree = ape::drop.tip(phylo, dtip)
       subdata = data[data>0]
 
     }
     else{
-      my_match <- match(labels, phylo$tip.label) ##label of abus data should exist in tree
-      if(sum(is.na(my_match)) > 0) stop("Argument labels and tree Tip not matach:some labes donot exist in tree tips")
       subtree<-phylo
       subdata<-data
     }
@@ -124,7 +126,7 @@ phy_L_Abu_T_<-function(treeNdata,t_1,rootExtend=T,treeH=0){
 #' @export
 #'
 ###should input abundance by vector with names
-phyBranchAL_Abu<-function(phylo,data, datatype="abundance",refT=0,rootExtend=T,removeAbu0=T){
+phyBranchAL_Abu<-function(phylo,data, datatype="abundance",refT=0,rootExtend=T,remove0=T){
   #if(class(phylo) != "phylo")
   if (!inherits(phylo, "phylo"))
     stop("invlid class: only support phylo object")
@@ -133,18 +135,21 @@ phyBranchAL_Abu<-function(phylo,data, datatype="abundance",refT=0,rootExtend=T,r
   if(datatype=="incidence_freq" | datatype=="incidence")
     stop('only support datatype="incidence_raw"')
 
+  labels<-names(data)
+  my_match <- match(labels, phylo$tip.label)
+  if(sum(is.na(my_match)) > 0) stop("Argument labels and tree Tip not matach")
+
+
   if(datatype=="abundance"){
 
     ###drop Abu=0 tips###
-    if(removeAbu0==T){
+    if(remove0==T){
       dtip = phylo$tip.label[-match(names(data[data>0]), phylo$tip.label)]
       subtree = ape::drop.tip(phylo, dtip)
       subdata = data[data>0]
 
     }
     else{
-      my_match <- match(labels, phylo$tip.label) ##label of abus data should exist in tree
-      if(sum(is.na(my_match)) > 0) stop("Argument labels and tree Tip not matach:some labes donot exist in tree tips")
       subtree<-phylo
       subdata<-data
     }
