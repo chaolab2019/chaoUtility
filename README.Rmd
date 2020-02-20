@@ -47,6 +47,8 @@ phylogeny fucntions:
 
 -[`phyBranchALinc()`](#phybranchalinc) : input incidence_raw data,phylo object,vector of ageTs,  return Chaophyabu object  (default `rootExtend =T` ,`remove0=T`)
 
+-[`phy_BranchAL_IncBootP()`](#phybranchalincp) : input incidence bootstrp p,phylo object,vector of ageTs,  return ChaophyincBP object  (default `rootExtend =T` ,`remove0=T`) : the inode formular is 1-(1-p1)(1-p2)
+
 -`phylo2chaolabphy()`
 
 
@@ -459,5 +461,50 @@ as.data.frame(phytree$phytree)
  plot(atree)
  
 ```
+
+
+
+
+
+
+## #phybranchalincp
+
+
+### EXAMPLES
+
+
+```{r }
+
+  data(phyincPdata)
+  pdata <- phyincPdata$pdata
+  phylotree <- phyincPdata$tree
+  
+  pdata
+
+  refTs<-c(80,90,100)
+  result<-phy_BranchAL_IncBootP(phylotree,pdata,refTs,remove0=FALSE)
+  
+
+ ##final treeNincBP:
+ treeNincBP<-result$treeNincBP
+ treeNincBP %>% print(n = Inf)
+ 
+ ##final treeH:
+ result$treeH
+ 
+ ##final branch.length:
+ result$BLbyT
+ 
+ ####result$treeNabu is an object of tbl_tree could change to phylo
+ tlb2phylo<-as.phylo(treeNincBP)
+ plot(tlb2phylo)
+ 
+ 
+ ###this is the original tree
+ plot(phylotree)
+ 
+```
+
+
 
 [back](#overview)

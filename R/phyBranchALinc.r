@@ -123,7 +123,7 @@ phy_BranchAL_Inc<-function(phylo,data, datatype="incidence_raw",refT=0,rootExten
 #' Idata<-bird.inc$North.site
 
 #' refTs<-c(80,90,100)
-#' result<-phyBranchAL_Abu(tree,Idata,datatype="incidence_raw",refTs)
+#' result<-phyBranchAL_Inc(tree,Idata,datatype="incidence_raw",refTs)
 #' result$treeNabu
 #' result$treeH
 #' result$BLbyT
@@ -225,4 +225,87 @@ phyBranchAL_Inc<-function(phylo,data, datatype="incidence_raw",refT=0,rootExtend
 
 }
 
+#######################################################################################################################
+#' R code for phylo to Chaophyabu function, calculte inodeP by incidence bootstrap p
+#' the formula is 1-(1-p1)(1-p2)
+#' @import dplyr
+#' @import tidytree
+#' @import ape
+#' @param phylo a phylo object
+#' @param pdata a vector with names: incidence bootstrap p
+#' @return  a Chaophyabu objects
+#' @examples
+
+#' data(phyincPdata)
+#' pdata <- phyincPdata$pdata
+#' phylotree <- phyincPdata$tree
+
+#' refTs<-c(80,90,100)
+#' result<-phy_BranchAL_IncBootP(phylotree,pdata,refTs,remove0=FALSE)
+#' result$treeNincBP
+#' result$treeH
+#' result$BLbyT
+#'
+#'
+#' @export
+
+
+
+phy_BranchAL_IncBootP<-function(phylo,pdata,refT=0,rootExtend=T,remove0=T){
+  #if(class(phylo) != "phylo")
+  if (!inherits(phylo, "phylo"))
+    stop("invlid class: only support phylo object")
+
+  labels<-names(pdata)
+  my_match <- match(labels, phylo$tip.label)
+  if(sum(is.na(my_match)) > 0) stop("Argument labels and tree Tip not matach")
+
+
+
+  ###drop Abu=0 tips###
+  if(remove0==T){
+    dtip = phylo$tip.label[-match(names(pdata[pdata>0]), phylo$tip.label)]
+    subtree = ape::drop.tip(phylo, dtip)
+    subdata = pdata[pdata>0]
+
+  }
+  else{
+    subtree<-phylo
+    subdata<-pdata
+  }
+
+
+  ###calculate inode abundance
+  chaotr<-phylo2phytree(subtree)
+
+  #inodelist<-names(chaotr$nodes)
+  tmp<-data.frame(label=names(subdata),x=subdata,stringsAsFactors=F)
+  treeNdata<-full_join(chaotr$phytree, tmp, by="label")
+  inodelist<-treeNdata %>% filter(tgroup !="Tip") %>% pull(node)
+  names(inodelist)<-treeNdata %>% filter(tgroup !="Tip") %>% pull(label)
+  inode_x<-sapply(inodelist,function(x){
+    tmp<-offspring(treeNdata,x,tiponly=T) %>% mutate(y=1-x) %>% select (y) %>% prod()
+    pi<-1-tmp
+    return(pi)
+  })
+
+
+  tmp1<-data.frame(label=names(inode_x),branch.incBP=inode_x)
+  tmp2<-tmp %>% rename(branch.incBP=x)
+  tmp_all<-rbind(tmp2,tmp1)
+  treeNdata<-full_join(treeNdata, tmp_all, by="label") %>% select(-x)
+
+  ###calculate inode length
+  # treeH and rootlength
+  treeH<-chaotr$treeH
+
+  phyL<-sapply(refT,function(y) phy_L_Abu_T_(treeNdata,y,rootExtend,treeH))
+  names(phyL)<-paste("T",refT,sep="")
+
+  z <- list("treeNincBP"=treeNdata,"treeH"=treeH,"BLbyT"=phyL)
+  class(z) <- "ChaophyincBP"
+  return(z)
+
+
+}
 

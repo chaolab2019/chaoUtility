@@ -26,7 +26,7 @@ bird.phy <- phybird.new$chaophytree
 tree<-tidytree::as.phylo(bird.phy$phytree)
 Idata<-bird.inc$North.site
 refTs<-c(80,90,100)
-result<-phyBranchAL_Abu(tree,Idata,datatype="incidence_raw",refTs)
+result<-phyBranchAL_Inc(tree,Idata,datatype="incidence_raw",refTs)
 result$treeNabu
 result$treeH
 result$BLbyT

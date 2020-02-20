@@ -120,3 +120,19 @@
 #' }
 
 "phyincisimple.new"
+
+#' phyBranchALinc.r data:
+#'
+#' A list containing pdata,phylo tree information
+#' diamonds.
+#'
+#' @format A list with 2 elements:
+#' \describe{
+#'   \item{pdata}{abundance data, vector}
+#'   \item{phylotree}{phylo tree information, phylo}
+#'
+#'
+#'   ...
+#' }
+
+"phyincPdata"
